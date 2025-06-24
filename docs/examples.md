@@ -238,4 +238,4 @@ Let's make programming more romantic together! 💕
 
 ---
 
-[← Back to Home](index.md) | [View Source Code →](https://github.com/username/couplescript/tree/main/examples/fun)
+[← Back to Home](index.md) | [View Source Code →](https://github.com/rahul05ranjan/couple-script/tree/main/examples/fun)

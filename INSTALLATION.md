@@ -6,11 +6,10 @@ Welcome to CoupleScript - the most romantic programming language ever created! T
 
 ### Option 1: Windows Users (Easiest!)
 
-1. **Download the project** (no additional software needed!)
-   ```powershell
+1. **Download the project** (no additional software needed!)   ```bash
    # Clone or download the CoupleScript project
-   git clone <repository-url>
-   cd CoupleScript
+   git clone https://github.com/rahul05ranjan/couple-script.git
+   cd couple-script
    ```
 
 2. **Run the build script**
