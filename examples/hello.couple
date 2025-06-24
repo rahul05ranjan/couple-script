@@ -1,25 +1,3 @@
-# Hello World in CoupleScript
-marry message "Hello, World!"
-remember message
-
-# Show off our relationship-themed language
-marry husband_name "Bob"
-marry wife_name "Alice"
-
-remember "Meet the couple:"
-remember "Husband: " + husband_name
-remember "Wife: " + wife_name
-
-# Demonstrate love and hate (boolean values)
-marry they_love_each_other love
-marry they_are_fighting hate
-
-argue they_love_each_other:
-    remember husband_name + " and " + wife_name + " are happy together!"
-makeup:
-    remember "They need some couple's therapy..."
-
-argue they_are_fighting:
-    remember "Oh no, they're having an argument!"
-makeup:
-    remember "All is peaceful in their relationship."
+# Hello World in CoupleScript 
+remember "Hello, World! 💕" 
+remember "Welcome to CoupleScript!" 

@@ -1,9 +1,28 @@
 # Makefile for CoupleScript Programming Language
 # Builds a completely independent language implementation
 
-# Assembler and linker
-AS = as
-LD = ld
+# Detect OS
+ifeq ($(OS),Windows_NT)
+    DETECTED_OS := Windows
+    AS = nasm
+    LD = link
+    ASFLAGS = -f win64
+    LDFLAGS = /subsystem:console /entry:main
+    EXE_EXT = .exe
+    CLEAN_CMD = del /Q
+    MKDIR_CMD = mkdir
+    RM_RECURSIVE = rmdir /S /Q
+else
+    DETECTED_OS := $(shell uname -s)
+    AS = as
+    LD = ld
+    ASFLAGS = --64
+    LDFLAGS = 
+    EXE_EXT = 
+    CLEAN_CMD = rm -f
+    MKDIR_CMD = mkdir -p
+    RM_RECURSIVE = rm -rf
+endif
 
 # Source files (only use existing bootstrap files)
 BOOTSTRAP_SOURCES = bootstrap/compiler.s bootstrap/vm.s
@@ -12,8 +31,8 @@ BOOTSTRAP_SOURCES = bootstrap/compiler.s bootstrap/vm.s
 BOOTSTRAP_OBJECTS = $(BOOTSTRAP_SOURCES:.s=.o)
 
 # Output executables
-COMPILER = couplescript-compiler
-VM = couplescript-vm
+COMPILER = couplescript-compiler$(EXE_EXT)
+VM = couplescript-vm$(EXE_EXT)
 INTERPRETER = couplescript
 
 # Default target
@@ -22,6 +41,22 @@ all: $(INTERPRETER)
 # Build the complete CoupleScript interpreter
 $(INTERPRETER): $(COMPILER) $(VM)
 	@echo "Building CoupleScript interpreter..."
+ifeq ($(OS),Windows_NT)
+	@echo '@echo off' > couplescript.bat
+	@echo 'REM CoupleScript Interpreter Launcher for Windows' >> couplescript.bat
+	@echo 'if "%1"=="" (' >> couplescript.bat
+	@echo '    echo CoupleScript Interactive Mode' >> couplescript.bat
+	@echo '    echo Type exit to quit' >> couplescript.bat
+	@echo '    :loop' >> couplescript.bat
+	@echo '    set /p line=cs^> ' >> couplescript.bat
+	@echo '    if "%line%"=="exit" goto :eof' >> couplescript.bat
+	@echo '    echo %line% | $(COMPILER).exe | $(VM).exe' >> couplescript.bat
+	@echo '    goto :loop' >> couplescript.bat
+	@echo ') else (' >> couplescript.bat
+	@echo '    $(COMPILER).exe "%1" && $(VM).exe output.csb' >> couplescript.bat
+	@echo ')' >> couplescript.bat
+	@echo "CoupleScript interpreter built successfully! Use: couplescript.bat"
+else
 	@echo '#!/bin/bash' > couplescript
 	@echo '# CoupleScript Interpreter Launcher' >> couplescript
 	@echo 'if [ $$# -eq 0 ]; then' >> couplescript
@@ -36,29 +71,47 @@ $(INTERPRETER): $(COMPILER) $(VM)
 	@echo '    ./$(COMPILER) "$$1" && ./$(VM) output.csb' >> couplescript
 	@echo 'fi' >> couplescript
 	@chmod +x couplescript
-	@echo "CoupleScript interpreter built successfully!"
+	@echo "CoupleScript interpreter built successfully! Use: ./couplescript"
+endif
 
 # Build the bootstrap compiler
 $(COMPILER): bootstrap/compiler.o
 	@echo "Linking bootstrap compiler..."
-	$(LD) -o $(COMPILER) bootstrap/compiler.o
+ifeq ($(OS),Windows_NT)
+	$(LD) $(LDFLAGS) /out:$(COMPILER) bootstrap/compiler.o
+else
+	$(LD) $(LDFLAGS) -o $(COMPILER) bootstrap/compiler.o
+endif
 
 # Build the virtual machine  
 $(VM): bootstrap/vm.o
 	@echo "Linking virtual machine..."
-	$(LD) -o $(VM) bootstrap/vm.o
+ifeq ($(OS),Windows_NT)
+	$(LD) $(LDFLAGS) /out:$(VM) bootstrap/vm.o
+else
+	$(LD) $(LDFLAGS) -o $(VM) bootstrap/vm.o
+endif
 
 # Compile assembly source files
 %.o: %.s
 	@echo "Assembling $<..."
-	$(AS) --64 -o $@ $<
+ifeq ($(OS),Windows_NT)
+	$(AS) $(ASFLAGS) -o $@ $<
+else
+	$(AS) $(ASFLAGS) -o $@ $<
+endif
 
 # Clean up
 clean:
 	@echo "Cleaning build files..."
-	rm -f bootstrap/*.o
-	rm -f $(COMPILER) $(VM) $(INTERPRETER)
-	rm -f output.csb
+ifeq ($(OS),Windows_NT)
+	$(CLEAN_CMD) bootstrap\*.o 2>nul || echo "No object files to clean"
+	$(CLEAN_CMD) $(COMPILER) $(VM) couplescript.bat output.csb 2>nul || echo "No executables to clean"
+else
+	$(CLEAN_CMD) bootstrap/*.o
+	$(CLEAN_CMD) $(COMPILER) $(VM) $(INTERPRETER)
+	$(CLEAN_CMD) output.csb
+endif
 
 # Install (copy to system PATH)
 install: $(INTERPRETER)
@@ -113,6 +166,19 @@ examples:
 help:
 	@echo "CoupleScript Build System"
 	@echo ""
+	@echo "Detected OS: $(DETECTED_OS)"
+	@echo ""
+	@echo "Prerequisites:"
+ifeq ($(OS),Windows_NT)
+	@echo "  - NASM assembler (download from nasm.us)"
+	@echo "  - Microsoft Build Tools or Visual Studio"
+	@echo "  - Or use WSL with build-essential"
+else
+	@echo "  - GNU assembler (as) or NASM"
+	@echo "  - GNU linker (ld)"
+	@echo "  - Usually included with build-essential"
+endif
+	@echo ""
 	@echo "Targets:"
 	@echo "  all       - Build the complete CoupleScript interpreter"
 	@echo "  clean     - Remove all build files"
@@ -123,7 +189,15 @@ help:
 	@echo "  help      - Show this help message"
 	@echo ""
 	@echo "Usage after building:"
-	@echo "  ./couplescript program.couple  - Run a CoupleScript program"
-	@echo "  ./couplescript -i          - Start interactive mode"
+ifeq ($(OS),Windows_NT)
+	@echo "  couplescript.bat program.couple  - Run a CoupleScript program"
+	@echo "  couplescript.bat                 - Start interactive mode"
+	@echo ""
+	@echo "Windows Alternative:"
+	@echo "  build_windows.bat               - Windows-specific build script"
+else
+	@echo "  ./couplescript program.couple   - Run a CoupleScript program"
+	@echo "  ./couplescript                  - Start interactive mode"
+endif
 
 .PHONY: all clean install uninstall test examples help

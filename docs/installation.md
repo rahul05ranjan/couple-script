@@ -285,7 +285,7 @@ choco install couplescript
 #### Scoop
 ```powershell
 # Coming soon
-scoop bucket add couplescript https://github.com/username/scoop-couplescript
+scoop bucket add couplescript https://github.com/rahul05ranjan/scoop-couplescript
 scoop install couplescript
 ```
 
