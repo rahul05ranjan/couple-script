@@ -4,8 +4,27 @@
 		{
 			"label": "Build CoupleScript",
 			"type": "shell",
-			"command": "build.bat",
+			"command": "make",
+			"args": ["all"],
 			"group": "build",
+			"problemMatcher": [],
+			"isBackground": false
+		},
+		{
+			"label": "Clean CoupleScript",
+			"type": "shell",
+			"command": "make",
+			"args": ["clean"],
+			"group": "build",
+			"problemMatcher": [],
+			"isBackground": false
+		},
+		{
+			"label": "Test CoupleScript",
+			"type": "shell",
+			"command": "make",
+			"args": ["test"],
+			"group": "test",
 			"problemMatcher": [],
 			"isBackground": false
 		}
