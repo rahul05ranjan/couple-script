@@ -1,0 +1,98 @@
+# CoupleScript .gitignore
+
+# Build artifacts
+*.o
+*.obj
+*.exe
+*.elf
+*.bin
+*.out
+
+# Temporary files
+*~
+*.tmp
+*.temp
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+*~
+
+# Test artifacts
+tests/temp/
+test_output.log
+
+# Platform specific
+*.dll
+*.so
+*.dylib
+
+# Backup files
+*.bak
+*.backup
+
+# Development artifacts
+couplescript
+couplescript.exe
+bootstrap/compiler
+bootstrap/vm
+bootstrap/*.o
+bootstrap/*.obj
+
+# Node modules (if any tools use them)
+node_modules/
+
+# Python cache (if any tools use them)
+__pycache__/
+*.pyc
+*.pyo
+
+# Compiled output directories
+build/
+dist/
+out/
+
+# Local environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE workspace files
+*.code-workspace
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# Coverage reports
+coverage/
+*.cover
+.nyc_output
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

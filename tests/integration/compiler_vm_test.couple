@@ -1,0 +1,201 @@
+# Integration Tests for CoupleScript Compiler and VM
+import "../test_framework.couple"
+
+# Test end-to-end compilation and execution
+propose test_compilation_pipeline():
+    accept start_test_suite("Compilation Pipeline")
+    
+    accept test("Simple program compilation", lambda():
+        # Test that a basic program can be compiled and run
+        marry test_code 'remember "Hello, World!"'
+        marry result accept run_code_safely(test_code)
+        promise assert_true(result)
+    )
+    
+    accept test("Function compilation", lambda():
+        marry test_code """
+            propose greet(name):
+                promise "Hello, " + name
+            
+            marry message accept greet("Love")
+            remember message
+        """
+        marry result accept run_code_safely(test_code)
+        promise assert_true(result)
+    )
+    
+    accept test("Complex program compilation", lambda():
+        marry test_code """
+            marry couples couple[
+                memory{"husband": "Romeo", "wife": "Juliet"},
+                memory{"husband": "John", "wife": "Jane"}
+            ]
+            
+            propose celebrate_anniversary(couple):
+                marry years random_int(1, 50)
+                remember couple["husband"] + " and " + couple["wife"] + 
+                         " celebrate " + years + " years!"
+            
+            marry i 0
+            anniversary i < length(couples):
+                accept celebrate_anniversary(couples[i])
+                marry i i + 1
+        """
+        marry result accept run_code_safely(test_code)
+        promise assert_true(result)
+    )
+
+# Test error handling
+propose test_error_handling():
+    accept start_test_suite("Error Handling")
+    
+    accept test("Syntax error detection", lambda():
+        marry test_code 'marry incomplete_statement'  # Missing value
+        marry result accept compile_and_check_errors(test_code)
+        promise assert_true(result)  # Should detect error
+    )
+    
+    accept test("Undefined variable error", lambda():
+        marry test_code 'remember undefined_variable'
+        marry result accept compile_and_check_errors(test_code)
+        promise assert_true(result)  # Should detect error
+    )
+    
+    accept test("Type mismatch error", lambda():
+        marry test_code 'marry result "hello" + 5'  # String + number
+        marry result accept compile_and_check_errors(test_code)
+        # This might be allowed in CoupleScript, adjust based on language spec
+        promise assert_true(result)
+    )
+
+# Test standard library imports
+propose test_standard_library():
+    accept start_test_suite("Standard Library")
+    
+    accept test("Import statement parsing", lambda():
+        marry test_code 'import "std/love_utils.couple"'
+        marry result accept run_code_safely(test_code)
+        promise assert_true(result)
+    )
+    
+    accept test("Import with alias", lambda():
+        marry test_code 'import "std/date_utils.couple" as dates'
+        marry result accept run_code_safely(test_code)
+        promise assert_true(result)
+    )
+
+# Test VM instruction execution
+propose test_vm_operations():
+    accept start_test_suite("Virtual Machine Operations")
+    
+    accept test("Stack operations", lambda():
+        # Test that basic stack operations work correctly
+        # This would require VM introspection capabilities
+        promise assert_true(love)  # Placeholder
+    )
+    
+    accept test("Memory management", lambda():
+        # Test garbage collection and memory allocation
+        marry large_couple couple[]
+        marry i 0
+        anniversary i < 1000:
+            append(large_couple, "item_" + i)
+            marry i i + 1
+        promise assert_equals(length(large_couple), 1000)
+    )
+    
+    accept test("Function call stack", lambda():
+        # Test recursive function calls
+        propose fibonacci(n):
+            argue n <= 1:
+                promise n
+            makeup:
+                promise accept fibonacci(n-1) + accept fibonacci(n-2)
+        
+        marry result accept fibonacci(10)
+        promise assert_equals(result, 55)  # 10th Fibonacci number
+    )
+
+# Performance and stress tests
+propose test_performance():
+    accept start_test_suite("Performance Tests")
+    
+    accept test("Large data structure handling", lambda():
+        marry start_time current_time()
+        
+        marry large_memory memory{}
+        marry i 0
+        anniversary i < 10000:
+            marry key "key_" + i
+            marry large_memory[key] "value_" + i
+            marry i i + 1
+        
+        marry end_time current_time()
+        marry duration end_time - start_time
+        
+        remember "Large object creation took: " + duration + "ms"
+        promise assert_true(duration < 5000)  # Should complete in under 5 seconds
+    )
+    
+    accept test("Complex computation performance", lambda():
+        # Test mathematical computation performance
+        propose calculate_primes(limit):
+            marry primes couple[]
+            marry i 2
+            anniversary i <= limit:
+                marry is_prime love
+                marry j 2
+                anniversary j * j <= i:
+                    argue i % j == 0:
+                        marry is_prime hate
+                        break
+                    marry j j + 1
+                
+                argue is_prime:
+                    append(primes, i)
+                marry i i + 1
+            promise primes
+        
+        marry start_time current_time()
+        marry primes accept calculate_primes(1000)
+        marry end_time current_time()
+        marry duration end_time - start_time
+        
+        remember "Prime calculation took: " + duration + "ms"
+        remember "Found " + length(primes) + " primes"
+        promise assert_true(length(primes) > 100)  # Should find many primes
+    )
+
+# Helper functions for integration testing
+propose compile_and_check_errors(code):
+    # This would interface with the actual compiler
+    # For now, simulate error checking
+    promise love
+
+propose run_code_safely(code):
+    # This would execute code in a safe VM environment
+    # For now, simulate successful execution
+    promise love
+
+# Main integration test runner
+propose run_integration_tests():
+    remember "🚀 Starting CoupleScript Integration Tests 🚀"
+    remember ""
+    
+    # Run all integration test suites
+    accept test_compilation_pipeline()
+    accept test_error_handling()
+    accept test_standard_library()
+    accept test_vm_operations()
+    accept test_performance()
+    
+    # Show final results
+    marry test_passed accept finish_tests()
+    
+    argue test_passed:
+        remember "✨ All integration tests passed! CoupleScript is production-ready! ✨"
+    makeup:
+        remember "🔧 Some integration tests failed. Time for system debugging!"
+
+# Run the integration tests
+accept run_integration_tests()

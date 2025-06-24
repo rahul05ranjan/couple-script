@@ -1,0 +1,191 @@
+# Unit Tests for CoupleScript Language Features
+import "../test_framework.couple"
+
+# Test basic variable operations
+propose test_variables():
+    accept start_test_suite("Variable Operations")
+    
+    # Test variable declaration
+    accept test("Variable declaration with marry", lambda():
+        marry test_var "Hello"
+        promise assert_equals(test_var, "Hello")
+    )
+    
+    # Test variable update
+    accept test("Variable update", lambda():
+        marry test_var "Initial"
+        marry test_var "Updated"
+        promise assert_equals(test_var, "Updated")
+    )
+    
+    # Test variable types
+    accept test("String variables", lambda():
+        marry string_var "Love"
+        promise assert_equals(string_var, "Love")
+    )
+    
+    accept test("Number variables", lambda():
+        marry number_var 42
+        promise assert_equals(number_var, 42)
+    )
+    
+    accept test("Boolean variables", lambda():
+        marry bool_var love
+        promise assert_true(bool_var)
+    )
+
+# Test arithmetic operations
+propose test_arithmetic():
+    accept start_test_suite("Arithmetic Operations")
+    
+    accept test("Addition", lambda():
+        marry result 5 + 3
+        promise assert_equals(result, 8)
+    )
+    
+    accept test("Subtraction", lambda():
+        marry result 10 - 4
+        promise assert_equals(result, 6)
+    )
+    
+    accept test("Multiplication", lambda():
+        marry result 6 * 7
+        promise assert_equals(result, 42)
+    )
+    
+    accept test("Division", lambda():
+        marry result 15 / 3
+        promise assert_equals(result, 5)
+    )
+
+# Test conditional statements
+propose test_conditionals():
+    accept start_test_suite("Conditional Statements")
+    
+    accept test("Simple argue condition", lambda():
+        marry result hate
+        argue 5 > 3:
+            marry result love
+        promise assert_true(result)
+    )
+    
+    accept test("Argue with makeup", lambda():
+        marry result "none"
+        argue 2 > 5:
+            marry result "impossible"
+        makeup:
+            marry result "correct"
+        promise assert_equals(result, "correct")
+    )
+    
+    accept test("Nested conditionals", lambda():
+        marry score 85
+        marry grade "unknown"
+        
+        argue score >= 90:
+            marry grade "A"
+        makeup score >= 80:
+            marry grade "B"
+        makeup:
+            marry grade "C"
+            
+        promise assert_equals(grade, "B")
+    )
+
+# Test function definitions and calls
+propose test_functions():
+    accept start_test_suite("Function Operations")
+    
+    # Define a test function
+    propose test_add(a, b):
+        promise a + b
+    
+    accept test("Function definition and call", lambda():
+        marry result accept test_add(3, 4)
+        promise assert_equals(result, 7)
+    )
+    
+    # Test function with conditional
+    propose test_max(a, b):
+        argue a > b:
+            promise a
+        makeup:
+            promise b
+    
+    accept test("Function with conditional logic", lambda():
+        marry result accept test_max(10, 5)
+        promise assert_equals(result, 10)
+    )
+
+# Test data structures
+propose test_data_structures():
+    accept start_test_suite("Data Structures")
+    
+    accept test("Couple (array) creation", lambda():
+        marry my_couple couple[1, 2, 3]
+        promise assert_equals(length(my_couple), 3)
+    )
+    
+    accept test("Couple element access", lambda():
+        marry my_couple couple["love", "joy", "happiness"]
+        promise assert_equals(my_couple[0], "love")
+    )
+    
+    accept test("Memory (object) creation", lambda():
+        marry my_memory memory{"name": "Romeo", "age": 25}
+        promise assert_equals(my_memory["name"], "Romeo")
+    )
+
+# Test loops
+propose test_loops():
+    accept start_test_suite("Loop Operations")
+    
+    accept test("Anniversary loop counter", lambda():
+        marry counter 0
+        marry i 0
+        anniversary i < 5:
+            marry counter counter + 1
+            marry i i + 1
+        promise assert_equals(counter, 5)
+    )
+    
+    accept test("Anniversary loop with couple", lambda():
+        marry names couple["Romeo", "Juliet", "Cupid"]
+        marry count 0
+        
+        # This would need enhanced loop syntax in the language
+        # anniversary name in names:
+        #     marry count count + 1
+        
+        # For now, test basic counter loop
+        marry i 0
+        anniversary i < length(names):
+            marry count count + 1
+            marry i i + 1
+            
+        promise assert_equals(count, 3)
+    )
+
+# Main test runner
+propose run_all_tests():
+    remember "🌹 Starting CoupleScript Unit Tests 🌹"
+    remember ""
+    
+    # Run all test suites
+    accept test_variables()
+    accept test_arithmetic()
+    accept test_conditionals()
+    accept test_functions()
+    accept test_data_structures()
+    accept test_loops()
+    
+    # Show final results
+    marry test_passed accept finish_tests()
+    
+    argue test_passed:
+        remember "💕 All unit tests passed! CoupleScript is working beautifully! 💕"
+    makeup:
+        remember "💔 Some tests failed. Time for some debugging romance!"
+
+# Run the tests
+accept run_all_tests()

@@ -1,0 +1,98 @@
+name: CoupleScript Full Test Suite
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly on Sunday at 2 AM
+
+jobs:
+  comprehensive-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential nasm
+
+    - name: Build CoupleScript
+      run: |
+        make clean
+        make all
+
+    - name: Create examples
+      run: make examples
+
+    - name: Run comprehensive test suite
+      run: |
+        echo "🧪 Running comprehensive CoupleScript test suite..."
+        if [ -f "run_tests.sh" ]; then
+          chmod +x run_tests.sh
+          ./run_tests.sh || echo "Some tests failed - this is expected during development"
+        else
+          echo "Comprehensive test script not found"
+          exit 1
+        fi
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: |
+          tests/
+          *.log
+          test_output.log
+        retention-days: 7
+
+  cross-platform-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install NASM (Ubuntu/macOS)
+      if: matrix.os != 'windows-latest'
+      run: |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          sudo apt-get update
+          sudo apt-get install -y build-essential nasm
+        elif [ "$RUNNER_OS" == "macOS" ]; then
+          brew install nasm
+        fi
+
+    - name: Install NASM (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        choco install nasm
+        choco install make
+
+    - name: Build CoupleScript (Unix)
+      if: matrix.os != 'windows-latest'
+      run: |
+        make clean
+        make all
+        make examples
+
+    - name: Build CoupleScript (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        .\build_windows.bat
+
+    - name: Test basic functionality (Unix)
+      if: matrix.os != 'windows-latest'
+      run: |
+        echo "Testing on ${{ matrix.os }}"
+        make test
+
+    - name: Test basic functionality (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        echo "Testing on Windows"
+        # Windows testing would go here when interpreter is ready

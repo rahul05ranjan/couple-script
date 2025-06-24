@@ -1,0 +1,211 @@
+# Test fixtures - Sample CoupleScript programs for testing
+
+# Valid programs that should compile and run successfully
+valid_hello_world = """
+# Simple hello world
+remember "Hello, World! 💕"
+"""
+
+valid_variables = """
+# Variable declarations and usage
+marry name "Romeo"
+marry age 25
+marry is_lover love
+
+remember "Name: " + name
+remember "Age: " + age
+remember "Is lover: " + is_lover
+"""
+
+valid_functions = """
+# Function definition and calls
+propose greet(name):
+    promise "Hello, " + name + "! 💕"
+
+propose add(a, b):
+    promise a + b
+
+marry greeting accept greet("Juliet")
+marry sum accept add(10, 15)
+
+remember greeting
+remember "Sum: " + sum
+"""
+
+valid_conditionals = """
+# Conditional statements
+marry score 85
+
+argue score >= 90:
+    remember "Excellent! A+ grade! 🌟"
+makeup score >= 80:
+    remember "Great job! B+ grade! 👏"
+makeup score >= 70:
+    remember "Good work! C+ grade! 👍"
+makeup:
+    remember "Keep trying! You'll get there! 💪"
+"""
+
+valid_loops = """
+# Loop constructs
+marry counter 0
+marry i 1
+
+anniversary i <= 5:
+    marry counter counter + i
+    remember "Adding " + i + ", counter now: " + counter
+    marry i i + 1
+
+remember "Final counter: " + counter
+"""
+
+valid_data_structures = """
+# Arrays and objects
+marry couple_names couple["Romeo", "Juliet", "Cupid"]
+marry relationship_info memory{
+    "status": "married",
+    "years": 5,
+    "children": 2,
+    "anniversary": "June 15"
+}
+
+remember "Couple: " + couple_names[0] + " and " + couple_names[1]
+remember "Status: " + relationship_info["status"]
+remember "Married for: " + relationship_info["years"] + " years"
+"""
+
+valid_complex_program = """
+# Complex program with multiple features
+propose calculate_compatibility(name1, name2):
+    marry total_letters length(name1) + length(name2)
+    marry compatibility (total_letters * 7) % 100
+    argument compatibility < 50:
+        promise compatibility + 50
+    makeup:
+        promise compatibility
+
+propose plan_anniversary(years):
+    argue years < 1:
+        promise "Plan a romantic dinner at home"
+    makeup years < 5:
+        promise "Weekend getaway to a cozy bed & breakfast"
+    makeup years < 10:
+        promise "Trip to Paris, the city of love"
+    makeup years < 25:
+        promise "Cruise around the Mediterranean"
+    makeup:
+        promise "Renewal of vows with the whole family"
+
+marry couples couple[
+    memory{"husband": "Romeo", "wife": "Juliet"},
+    memory{"husband": "John", "wife": "Jane"},
+    memory{"husband": "Adam", "wife": "Eve"}
+]
+
+remember "💕 Love Compatibility Calculator 💕"
+remember ""
+
+marry i 0
+anniversary i < length(couples):
+    marry couple couples[i]
+    marry husband couple["husband"]
+    marry wife couple["wife"]
+    
+    marry compatibility accept calculate_compatibility(husband, wife)
+    remember husband + " and " + wife + " compatibility: " + compatibility + "%"
+    
+    marry years random_int(1, 30)
+    marry anniversary_plan accept plan_anniversary(years)
+    remember "Anniversary plan for year " + years + ": " + anniversary_plan
+    remember ""
+    
+    marry i i + 1
+
+remember "All couples analyzed! 💕"
+"""
+
+# Invalid programs that should produce compile errors
+invalid_syntax_error = """
+# Missing value in assignment
+marry incomplete_statement
+"""
+
+invalid_undefined_variable = """
+# Using undefined variable
+remember undefined_variable
+"""
+
+invalid_function_call = """
+# Calling undefined function
+marry result accept nonexistent_function(5)
+"""
+
+invalid_wrong_arguments = """
+# Wrong number of arguments
+propose test_function(a, b):
+    promise a + b
+
+marry result accept test_function(5)  # Missing second argument
+"""
+
+invalid_nested_errors = """
+# Multiple syntax errors
+propose broken_function(
+    # Missing closing parenthesis and body
+    
+marry another_error  # Missing value
+
+# Undefined function call in loop
+anniversary i < undefined_limit:
+    accept another_undefined_function()
+"""
+
+# Edge cases for stress testing
+edge_case_deep_recursion = """
+# Deep recursion test
+propose fibonacci(n):
+    argue n <= 1:
+        promise n
+    makeup:
+        promise accept fibonacci(n-1) + accept fibonacci(n-2)
+
+marry result accept fibonacci(30)  # Should work but be slow
+remember "Fibonacci(30) = " + result
+"""
+
+edge_case_large_data = """
+# Large data structure test
+marry big_couple couple[]
+marry i 0
+anniversary i < 10000:
+    append(big_couple, "item_" + i)
+    marry i i + 1
+
+remember "Created couple with " + length(big_couple) + " items"
+"""
+
+edge_case_string_operations = """
+# String edge cases
+marry empty_string ""
+marry long_string "a" * 10000  # If string multiplication is supported
+marry unicode_string "💕🌹💖✨🎉"
+
+remember "Empty: '" + empty_string + "'"
+remember "Long string length: " + length(long_string)
+remember "Unicode: " + unicode_string
+"""
+
+edge_case_numeric_limits = """
+# Numeric edge cases
+marry very_large_number 999999999999999
+marry very_small_number -999999999999999
+marry floating_point 3.141592653589793
+
+marry division_result 1 / 3
+marry zero_division 1 / 0  # Should handle gracefully
+
+remember "Large: " + very_large_number
+remember "Small: " + very_small_number
+remember "Float: " + floating_point
+remember "Division: " + division_result
+"""

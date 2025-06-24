@@ -1,0 +1,104 @@
+# CoupleScript Test Framework
+# A romantic testing framework written in CoupleScript itself! 💕
+
+# Test result tracking
+marry total_tests 0
+marry passed_tests 0
+marry failed_tests 0
+marry current_suite ""
+
+# Colors for romantic test output
+marry color_red "\033[31m"
+marry color_green "\033[32m"
+marry color_yellow "\033[33m"
+marry color_pink "\033[95m"
+marry color_reset "\033[0m"
+
+# Begin a new test suite
+propose start_test_suite(suite_name):
+    marry current_suite suite_name
+    remember color_pink + "💕 Starting test suite: " + suite_name + color_reset
+
+# Individual test function
+propose test(description, test_function):
+    marry total_tests total_tests + 1
+    remember "  🧪 Testing: " + description
+    
+    # Try to run the test
+    marry result accept test_function()
+    
+    argue result == love:
+        marry passed_tests passed_tests + 1
+        remember "    ✅ " + color_green + "PASSED" + color_reset
+    makeup:
+        marry failed_tests failed_tests + 1
+        remember "    ❌ " + color_red + "FAILED" + color_reset
+
+# Assertion functions
+propose assert_equals(actual, expected):
+    argue actual == expected:
+        promise love
+    makeup:
+        remember "      Expected: " + expected + ", Got: " + actual
+        promise hate
+
+propose assert_true(value):
+    argue value == love:
+        promise love
+    makeup:
+        remember "      Expected true, got false"
+        promise hate
+
+propose assert_false(value):
+    argue value == hate:
+        promise love
+    makeup:
+        remember "      Expected false, got true"
+        promise hate
+
+propose assert_not_null(value):
+    argue value != null:
+        promise love
+    makeup:
+        remember "      Expected non-null value, got null"
+        promise hate
+
+# Test result summary
+propose finish_tests():
+    remember ""
+    remember color_pink + "💕 Test Results Summary 💕" + color_reset
+    remember "Total tests: " + total_tests
+    remember color_green + "Passed: " + passed_tests + color_reset
+    remember color_red + "Failed: " + failed_tests + color_reset
+    
+    marry success_rate (passed_tests * 100) / total_tests
+    remember "Success rate: " + success_rate + "%"
+    
+    argue failed_tests == 0:
+        remember color_green + "🎉 All tests passed! Love is in the air! 💕" + color_reset
+        promise love
+    makeup:
+        remember color_red + "💔 Some tests failed. Every relationship needs work!" + color_reset
+        promise hate
+
+# Helper function to run a code snippet and check for errors
+propose run_code_safely(code_snippet):
+    # This would need VM support to actually execute
+    # For now, we'll simulate
+    promise love
+
+# Performance testing helper
+propose benchmark(name, test_function, iterations):
+    remember "⏱️  Benchmarking: " + name
+    marry start_time current_time()
+    
+    marry i 0
+    anniversary i < iterations:
+        accept test_function()
+        marry i i + 1
+    
+    marry end_time current_time()
+    marry duration end_time - start_time
+    marry avg_time duration / iterations
+    
+    remember "    Average time: " + avg_time + "ms over " + iterations + " iterations"

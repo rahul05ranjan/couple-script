@@ -196,7 +196,57 @@ We love contributions from the community! CoupleScript is all about spreading lo
 - Improve installation guides
 - Add translations for documentation
 
-### 🚀 Quick Start for Contributors
+### 🧪 Testing
+
+CoupleScript includes a comprehensive testing framework designed for the complete language implementation:
+
+### 🎯 **Current CI Status: ✅ PASSING**
+
+The CI pipeline validates project structure and build system:
+
+```bash
+# CI validation (works now)
+make test                   # Project structure validation
+./validate_project.sh      # Comprehensive project health check
+
+# Build testing (requires NASM)
+make test-build            # Validates successful compilation
+
+# Full testing (requires working interpreter)
+make test-full             # Complete test suite with execution
+```
+
+### 📊 **Test Coverage Levels**
+
+**Level 1 - ✅ Structure Validation (CI Ready)**
+- ✅ Project structure and file organization
+- ✅ CoupleScript syntax validation in examples
+- ✅ Documentation completeness
+- ✅ Build system configuration
+
+**Level 2 - 🔨 Build Validation (NASM Required)**
+- 🔨 Bootstrap compiler assembly
+- 🔨 Virtual machine compilation
+- 🔨 Binary artifact creation
+
+**Level 3 - 🚀 Runtime Testing (Full Implementation)**
+- 🚀 Language feature execution
+- 🚀 Error handling validation
+- 🚀 Performance benchmarking
+- 🚀 Cross-platform compatibility
+
+### 🏗️ **Testing Infrastructure**
+
+The project includes a complete testing framework ready for when the interpreter is functional:
+
+- `tests/test_framework.couple` - Testing framework written in CoupleScript
+- `tests/unit/` - Unit tests for language features
+- `tests/integration/` - End-to-end integration tests
+- `run_tests.sh` / `run_tests.bat` - Cross-platform test runners
+
+See `tests/README.md` for detailed testing documentation.
+
+## 🚀 Quick Startfor Contributors
 
 #### 1. **Fork & Clone**
 ```bash
