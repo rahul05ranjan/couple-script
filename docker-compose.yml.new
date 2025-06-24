@@ -1,0 +1,72 @@
+# Docker Compose for CoupleScript Development
+# Provides multiple service configurations for different use cases
+
+version: '3.8'
+
+services:
+  # Main CoupleScript interactive environment
+  couplescript:
+    build: .
+    image: couplescript:latest
+    container_name: couplescript-main
+    volumes:
+      - ./examples:/couplescript/examples:ro
+      - ./user-programs:/couplescript/user-programs
+    working_dir: /couplescript
+    stdin_open: true
+    tty: true
+    command: ./couplescript
+
+  # Development environment with source mounted
+  couplescript-dev:
+    build: .
+    image: couplescript:latest
+    container_name: couplescript-dev
+    volumes:
+      - .:/couplescript
+    working_dir: /couplescript
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    user: root
+
+  # Test runner service
+  couplescript-test:
+    build: .
+    image: couplescript:latest
+    container_name: couplescript-test
+    volumes:
+      - .:/couplescript
+    working_dir: /couplescript
+    command: make test
+
+  # Example runner - runs all examples
+  couplescript-examples:
+    build: .
+    image: couplescript:latest
+    container_name: couplescript-examples
+    volumes:
+      - ./examples:/couplescript/examples:ro
+    working_dir: /couplescript
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        echo '💕 Running CoupleScript Examples 💕'
+        echo 'Running hello.couple:'
+        ./couplescript examples/hello.couple
+        echo 'Running simple.couple:'
+        ./couplescript examples/simple.couple
+        echo 'Running love_story.couple:'
+        ./couplescript examples/love_story.couple
+        echo '✨ All examples completed! ✨'
+
+# Networks (if needed for future web interface)
+networks:
+  couplescript-network:
+    driver: bridge
+
+# Volumes for persistent storage
+volumes:
+  couplescript-data:
+    driver: local

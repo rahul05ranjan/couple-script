@@ -3,9 +3,10 @@
 *The world's most romantic programming language - where every program is a love story!*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-pink.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/rahul05ranjan/couple-script)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Docker-lightgrey.svg)](https://github.com/rahul05ranjan/couple-script)
 [![Language](https://img.shields.io/badge/Language-CoupleScript-ff69b4.svg)](https://github.com/rahul05ranjan/couple-script)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/rahul05ranjan/couple-script)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://github.com/rahul05ranjan/couple-script)
 [![Love Level](https://img.shields.io/badge/Love%20Level-100%25-red.svg?style=flat&logo=heart)](https://github.com/rahul05ranjan/couple-script)
 [![Documentation](https://img.shields.io/badge/docs-GitHub_Pages-blue.svg)](https://rahul05ranjan.github.io/couple-script)
 
@@ -38,9 +39,10 @@ makeup:
 - 🎭 **Relationship-Themed Keywords** - `marry`, `propose`, `accept`, `argue`, `makeup`, `remember`
 - 🔧 **Self-Hosting** - Compiler written in CoupleScript itself!
 - ⚡ **Fast** - Assembly-based virtual machine
-- 🌍 **Cross-Platform** - Windows, Linux, macOS
+- 🌍 **Cross-Platform** - Windows, Linux, macOS, Docker
 - 📚 **Educational** - Learn programming through romantic metaphors
 - 🎮 **Interactive REPL** - Live coding environment
+- 🐳 **Docker Ready** - Run anywhere with Docker support
 - 💖 **Fun** - Makes programming enjoyable for everyone!
 
 ## Language Features
@@ -155,6 +157,61 @@ build_windows.bat
 
 **Option 3: GitHub Codespaces/Online**
 - Open this repo in GitHub Codespaces - everything works out of the box!
+
+**Option 4: Docker (Easiest - No Dependencies!)**
+
+🐳 **No installation required!** Run CoupleScript instantly with Docker:
+
+```bash
+# Build and run immediately (one command!)
+docker build -t couplescript https://github.com/rahul05ranjan/couple-script.git && docker run -it --rm couplescript
+
+# Or clone and use helper scripts:
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
+./docker-run.sh build && ./docker-run.sh run    # Linux/Mac
+docker-run.bat build && docker-run.bat run      # Windows
+```
+
+Perfect for:
+- 🎓 **Education** - No setup hassles for students
+- 🧪 **Testing** - Try CoupleScript without installing anything
+- 🌍 **Any Platform** - Works anywhere Docker runs
+- 👥 **Teams** - Consistent development environment
+
+**📖 [Complete Docker Guide](DOCKER.md)** for advanced usage, development, and deployment
+
+## 🐳 Docker Support
+
+CoupleScript now supports Docker for easy deployment across any platform! Perfect for consistent development environments and cloud deployments.
+
+### Quick Docker Start
+
+```bash
+# Build the image
+make docker-build
+
+# Run interactively
+make docker-run
+
+# Or use helper scripts:
+./docker-run.sh build    # Linux/Mac
+docker-run.bat build     # Windows
+```
+
+### Docker Commands
+
+```bash
+# Build & run
+make docker-build        # Build Docker image
+make docker-run          # Run interactive CoupleScript
+make docker-test         # Run all tests in Docker
+make docker-examples     # Run example programs
+make docker-dev          # Start development environment
+make docker-clean        # Clean up Docker resources
+```
+
+**📖 [Complete Docker Guide](DOCKER.md)** - Detailed Docker usage instructions
 
 ## Examples
 
