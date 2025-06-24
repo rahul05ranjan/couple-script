@@ -1,0 +1,663 @@
+# CoupleScript Language Specification
+# Written in CoupleScript itself! (Self-hosting)
+
+# Core language compiler written in CoupleScript
+propose tokenize(source):
+    marry tokens couple[]
+    marry position 0
+    marry line 1
+    marry column 1
+    
+    # Main tokenization loop
+    anniversary position < length(source):
+        marry char get_char(source, position)
+        
+        # Skip whitespace
+        argue char == " " or char == "\t" or char == "\r":
+            marry position position + 1
+            marry column column + 1
+            continue
+        
+        # Handle newlines
+        argue char == "\n":
+            append(tokens, memory{"type": "NEWLINE", "line": line, "column": column})
+            marry position position + 1
+            marry line line + 1
+            marry column 1
+            continue
+        
+        # Handle comments
+        argue char == "#":
+            anniversary get_char(source, position) != "\n" and position < length(source):
+                marry position position + 1
+            continue
+        
+        # Handle strings
+        argue char == "\"" or char == "'":
+            marry string_value ""
+            marry quote char
+            marry position position + 1
+            marry column column + 1
+            
+            anniversary position < length(source):
+                marry current get_char(source, position)
+                argue current == quote:
+                    break
+                argue current == "\\":
+                    marry position position + 1
+                    marry current get_char(source, position)
+                    argue current == "n":
+                        marry string_value string_value + "\n"
+                    makeup current == "t":
+                        marry string_value string_value + "\t"
+                    makeup:
+                        marry string_value string_value + current
+                makeup:
+                    marry string_value string_value + current
+                marry position position + 1
+                marry column column + 1
+            
+            append(tokens, memory{"type": "STRING", "value": string_value, "line": line, "column": column})
+            marry position position + 1
+            marry column column + 1
+            continue
+        
+        # Handle numbers
+        argue is_digit(char):
+            marry number_value ""
+            marry has_decimal hate
+            
+            anniversary position < length(source) and (is_digit(get_char(source, position)) or get_char(source, position) == "."):
+                marry current get_char(source, position)
+                argue current == ".":
+                    argue has_decimal:
+                        break
+                    marry has_decimal love
+                marry number_value number_value + current
+                marry position position + 1
+                marry column column + 1
+            
+            marry value parse_number(number_value)
+            append(tokens, memory{"type": "NUMBER", "value": value, "line": line, "column": column})
+            continue
+        
+        # Handle identifiers and keywords
+        argue is_alpha(char) or char == "_":
+            marry identifier ""
+            
+            anniversary position < length(source) and (is_alnum(get_char(source, position)) or get_char(source, position) == "_"):
+                marry identifier identifier + get_char(source, position)
+                marry position position + 1
+                marry column column + 1
+            
+            # Check if it's a keyword
+            marry token_type get_keyword_type(identifier)
+            argue token_type == "IDENTIFIER":
+                append(tokens, memory{"type": "IDENTIFIER", "value": identifier, "line": line, "column": column})
+            makeup:
+                append(tokens, memory{"type": token_type, "value": identifier, "line": line, "column": column})
+            continue
+        
+        # Handle operators and delimiters
+        marry op_type get_operator_type(char)
+        argue op_type != "UNKNOWN":
+            append(tokens, memory{"type": op_type, "line": line, "column": column})
+            marry position position + 1
+            marry column column + 1
+            continue
+        
+        # Unknown character - error
+        remember "Syntax Error: Unexpected character '" + char + "' at line " + line + ", column " + column
+        promise couple[]
+    
+    append(tokens, memory{"type": "EOF", "line": line, "column": column})
+    promise tokens
+
+propose get_keyword_type(identifier):
+    marry keywords memory{
+        "marry": "MARRY",
+        "divorce": "DIVORCE", 
+        "propose": "PROPOSE",
+        "accept": "ACCEPT",
+        "argue": "ARGUE",
+        "makeup": "MAKEUP",
+        "remember": "REMEMBER",
+        "forget": "FORGET",
+        "promise": "PROMISE",
+        "anniversary": "ANNIVERSARY",
+        "separate": "SEPARATE",
+        "together": "TOGETHER",
+        "love": "LOVE",
+        "hate": "HATE",
+        "heart": "HEART",
+        "words": "WORDS",
+        "couple": "COUPLE",
+        "memory": "MEMORY",
+        "in": "IN",
+        "and": "AND",
+        "or": "OR",
+        "not": "NOT"
+    }
+    
+    argue has_key(keywords, identifier):
+        promise keywords[identifier]
+    makeup:
+        promise "IDENTIFIER"
+
+propose get_operator_type(char):
+    marry operators memory{
+        "+": "PLUS",
+        "-": "MINUS", 
+        "*": "MULTIPLY",
+        "/": "DIVIDE",
+        "=": "ASSIGN",
+        "(": "LPAREN",
+        ")": "RPAREN",
+        "[": "LBRACKET",
+        "]": "RBRACKET",
+        "{": "LBRACE",
+        "}": "RBRACE",
+        ",": "COMMA",
+        ":": "COLON",
+        ";": "SEMICOLON",
+        ".": "DOT",
+        "<": "LESS_THAN",
+        ">": "GREATER_THAN"
+    }
+    
+    argue has_key(operators, char):
+        promise operators[char]
+    makeup:
+        promise "UNKNOWN"
+
+# Parser - converts tokens to Abstract Syntax Tree
+propose parse(tokens):
+    marry parser memory{
+        "tokens": tokens,
+        "position": 0,
+        "current_token": tokens[0]
+    }
+    
+    marry statements couple[]
+    
+    anniversary parser["current_token"]["type"] != "EOF":
+        marry stmt parse_statement(parser)
+        argue stmt != hate:
+            append(statements, stmt)
+    
+    promise memory{"type": "PROGRAM", "statements": statements}
+
+propose parse_statement(parser):
+    marry token_type parser["current_token"]["type"]
+    
+    argue token_type == "MARRY":
+        promise parse_assignment(parser)
+    makeup token_type == "PROPOSE":
+        promise parse_function_definition(parser)
+    makeup token_type == "ACCEPT":
+        promise parse_function_call(parser)
+    makeup token_type == "ARGUE":
+        promise parse_if_statement(parser)
+    makeup token_type == "REMEMBER":
+        promise parse_print_statement(parser)
+    makeup token_type == "ANNIVERSARY":
+        promise parse_loop_statement(parser)
+    makeup token_type == "PROMISE":
+        promise parse_return_statement(parser)
+    makeup token_type == "NEWLINE":
+        advance_token(parser)
+        promise parse_statement(parser)
+    makeup:
+        remember "Parse Error: Unexpected token " + token_type
+        promise hate
+
+propose parse_assignment(parser):
+    # marry variable value
+    advance_token(parser)  # consume "marry"
+    
+    argue parser["current_token"]["type"] != "IDENTIFIER":
+        remember "Parse Error: Expected identifier after 'marry'"
+        promise hate
+    
+    marry variable_name parser["current_token"]["value"]
+    advance_token(parser)  # consume identifier
+    
+    marry value parse_expression(parser)
+    
+    promise memory{
+        "type": "ASSIGNMENT",
+        "variable": variable_name,
+        "value": value
+    }
+
+propose parse_function_definition(parser):
+    # propose function_name(parameters): body
+    advance_token(parser)  # consume "propose"
+    
+    argue parser["current_token"]["type"] != "IDENTIFIER":
+        remember "Parse Error: Expected function name after 'propose'"
+        promise hate
+    
+    marry function_name parser["current_token"]["value"]
+    advance_token(parser)  # consume function name
+    
+    argue parser["current_token"]["type"] != "LPAREN":
+        remember "Parse Error: Expected '(' after function name"
+        promise hate
+    
+    advance_token(parser)  # consume "("
+    
+    marry parameters couple[]
+    anniversary parser["current_token"]["type"] != "RPAREN":
+        argue parser["current_token"]["type"] == "IDENTIFIER":
+            append(parameters, parser["current_token"]["value"])
+            advance_token(parser)
+            
+            argue parser["current_token"]["type"] == "COMMA":
+                advance_token(parser)
+        makeup:
+            remember "Parse Error: Expected parameter name"
+            promise hate
+    
+    advance_token(parser)  # consume ")"
+    
+    argue parser["current_token"]["type"] != "COLON":
+        remember "Parse Error: Expected ':' after function parameters"
+        promise hate
+    
+    advance_token(parser)  # consume ":"
+    
+    marry body couple[]
+    anniversary parser["current_token"]["type"] != "EOF" and not is_end_of_block(parser):
+        marry stmt parse_statement(parser)
+        argue stmt != hate:
+            append(body, stmt)
+    
+    promise memory{
+        "type": "FUNCTION_DEFINITION",
+        "name": function_name,
+        "parameters": parameters,
+        "body": body
+    }
+
+propose parse_function_call(parser):
+    # accept function_name(arguments)
+    advance_token(parser)  # consume "accept"
+    
+    argue parser["current_token"]["type"] != "IDENTIFIER":
+        remember "Parse Error: Expected function name after 'accept'"
+        promise hate
+    
+    marry function_name parser["current_token"]["value"]
+    advance_token(parser)  # consume function name
+    
+    argue parser["current_token"]["type"] != "LPAREN":
+        remember "Parse Error: Expected '(' after function name"
+        promise hate
+    
+    advance_token(parser)  # consume "("
+    
+    marry arguments couple[]
+    anniversary parser["current_token"]["type"] != "RPAREN":
+        marry arg parse_expression(parser)
+        append(arguments, arg)
+        
+        argue parser["current_token"]["type"] == "COMMA":
+            advance_token(parser)
+    
+    advance_token(parser)  # consume ")"
+    
+    promise memory{
+        "type": "FUNCTION_CALL",
+        "name": function_name,
+        "arguments": arguments
+    }
+
+propose parse_if_statement(parser):
+    # argue condition: body makeup: else_body
+    advance_token(parser)  # consume "argue"
+    
+    marry condition parse_expression(parser)
+    
+    argue parser["current_token"]["type"] != "COLON":
+        remember "Parse Error: Expected ':' after condition"
+        promise hate
+    
+    advance_token(parser)  # consume ":"
+    
+    marry if_body couple[]
+    anniversary parser["current_token"]["type"] != "MAKEUP" and parser["current_token"]["type"] != "EOF":
+        marry stmt parse_statement(parser)
+        argue stmt != hate:
+            append(if_body, stmt)
+    
+    marry else_body couple[]
+    argue parser["current_token"]["type"] == "MAKEUP":
+        advance_token(parser)  # consume "makeup"
+        
+        argue parser["current_token"]["type"] != "COLON":
+            remember "Parse Error: Expected ':' after 'makeup'"
+            promise hate
+        
+        advance_token(parser)  # consume ":"
+        
+        anniversary parser["current_token"]["type"] != "EOF" and not is_end_of_block(parser):
+            marry stmt parse_statement(parser)
+            argue stmt != hate:
+                append(else_body, stmt)
+    
+    promise memory{
+        "type": "IF_STATEMENT",
+        "condition": condition,
+        "if_body": if_body,
+        "else_body": else_body
+    }
+
+propose parse_print_statement(parser):
+    # remember expression
+    advance_token(parser)  # consume "remember"
+    
+    marry expression parse_expression(parser)
+    
+    promise memory{
+        "type": "PRINT_STATEMENT",
+        "expression": expression
+    }
+
+propose parse_expression(parser):
+    # Parse expressions with operator precedence
+    promise parse_or_expression(parser)
+
+propose parse_or_expression(parser):
+    marry left parse_and_expression(parser)
+    
+    anniversary parser["current_token"]["type"] == "OR":
+        advance_token(parser)
+        marry right parse_and_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": "OR",
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_and_expression(parser):
+    marry left parse_equality_expression(parser)
+    
+    anniversary parser["current_token"]["type"] == "AND":
+        advance_token(parser)
+        marry right parse_equality_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": "AND",
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_equality_expression(parser):
+    marry left parse_comparison_expression(parser)
+    
+    anniversary parser["current_token"]["type"] == "EQUALS" or parser["current_token"]["type"] == "NOT_EQUALS":
+        marry operator parser["current_token"]["type"]
+        advance_token(parser)
+        marry right parse_comparison_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": operator,
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_comparison_expression(parser):
+    marry left parse_additive_expression(parser)
+    
+    anniversary is_comparison_operator(parser["current_token"]["type"]):
+        marry operator parser["current_token"]["type"]
+        advance_token(parser)
+        marry right parse_additive_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": operator,
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_additive_expression(parser):
+    marry left parse_multiplicative_expression(parser)
+    
+    anniversary parser["current_token"]["type"] == "PLUS" or parser["current_token"]["type"] == "MINUS":
+        marry operator parser["current_token"]["type"]
+        advance_token(parser)
+        marry right parse_multiplicative_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": operator,
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_multiplicative_expression(parser):
+    marry left parse_primary_expression(parser)
+    
+    anniversary parser["current_token"]["type"] == "MULTIPLY" or parser["current_token"]["type"] == "DIVIDE":
+        marry operator parser["current_token"]["type"]
+        advance_token(parser)
+        marry right parse_primary_expression(parser)
+        marry left memory{
+            "type": "BINARY_OPERATION",
+            "operator": operator,
+            "left": left,
+            "right": right
+        }
+    
+    promise left
+
+propose parse_primary_expression(parser):
+    marry token_type parser["current_token"]["type"]
+    
+    argue token_type == "NUMBER":
+        marry value parser["current_token"]["value"]
+        advance_token(parser)
+        promise memory{"type": "NUMBER", "value": value}
+    
+    makeup token_type == "STRING":
+        marry value parser["current_token"]["value"]
+        advance_token(parser)
+        promise memory{"type": "STRING", "value": value}
+    
+    makeup token_type == "LOVE":
+        advance_token(parser)
+        promise memory{"type": "BOOLEAN", "value": love}
+    
+    makeup token_type == "HATE":
+        advance_token(parser)
+        promise memory{"type": "BOOLEAN", "value": hate}
+    
+    makeup token_type == "IDENTIFIER":
+        marry name parser["current_token"]["value"]
+        advance_token(parser)
+        promise memory{"type": "VARIABLE", "name": name}
+    
+    makeup token_type == "LPAREN":
+        advance_token(parser)  # consume "("
+        marry expr parse_expression(parser)
+        argue parser["current_token"]["type"] != "RPAREN":
+            remember "Parse Error: Expected ')'"
+            promise hate
+        advance_token(parser)  # consume ")"
+        promise expr
+    
+    makeup:
+        remember "Parse Error: Unexpected token " + token_type
+        promise hate
+
+# Code generator - converts AST to bytecode
+propose generate_bytecode(ast):
+    marry bytecode couple[]
+    marry generator memory{
+        "bytecode": bytecode,
+        "labels": memory{},
+        "label_counter": 0
+    }
+    
+    generate_statements(generator, ast["statements"])
+    
+    # Add halt instruction
+    emit_instruction(generator, "HALT")
+    
+    promise generator["bytecode"]
+
+propose generate_statements(generator, statements):
+    anniversary stmt in statements:
+        generate_statement(generator, stmt)
+
+propose generate_statement(generator, stmt):
+    marry stmt_type stmt["type"]
+    
+    argue stmt_type == "ASSIGNMENT":
+        generate_assignment(generator, stmt)
+    makeup stmt_type == "FUNCTION_DEFINITION":
+        generate_function_definition(generator, stmt)
+    makeup stmt_type == "FUNCTION_CALL":
+        generate_function_call(generator, stmt)
+    makeup stmt_type == "IF_STATEMENT":
+        generate_if_statement(generator, stmt)
+    makeup stmt_type == "PRINT_STATEMENT":
+        generate_print_statement(generator, stmt)
+    makeup stmt_type == "RETURN_STATEMENT":
+        generate_return_statement(generator, stmt)
+
+propose generate_assignment(generator, stmt):
+    # Generate code for the value expression
+    generate_expression(generator, stmt["value"])
+    
+    # Store in variable (simplified - using global storage)
+    emit_instruction(generator, "STORE_GLOBAL")
+    emit_operand(generator, get_variable_index(stmt["variable"]))
+
+propose generate_expression(generator, expr):
+    marry expr_type expr["type"]
+    
+    argue expr_type == "NUMBER":
+        emit_instruction(generator, "PUSH")
+        emit_operand(generator, expr["value"])
+    makeup expr_type == "STRING":
+        emit_instruction(generator, "PUSH")
+        emit_operand(generator, expr["value"])
+    makeup expr_type == "BOOLEAN":
+        emit_instruction(generator, "PUSH")
+        emit_operand(generator, expr["value"])
+    makeup expr_type == "VARIABLE":
+        emit_instruction(generator, "LOAD_GLOBAL")
+        emit_operand(generator, get_variable_index(expr["name"]))
+    makeup expr_type == "BINARY_OPERATION":
+        generate_expression(generator, expr["left"])
+        generate_expression(generator, expr["right"])
+        
+        marry operator expr["operator"]
+        argue operator == "PLUS":
+            emit_instruction(generator, "ADD")
+        makeup operator == "MINUS":
+            emit_instruction(generator, "SUB")
+        makeup operator == "MULTIPLY":
+            emit_instruction(generator, "MUL")
+        makeup operator == "DIVIDE":
+            emit_instruction(generator, "DIV")
+        makeup operator == "EQUALS":
+            emit_instruction(generator, "EQ")
+        makeup operator == "LESS_THAN":
+            emit_instruction(generator, "LT")
+        makeup operator == "GREATER_THAN":
+            emit_instruction(generator, "GT")
+
+propose generate_print_statement(generator, stmt):
+    generate_expression(generator, stmt["expression"])
+    emit_instruction(generator, "PRINT")
+
+# Utility functions
+propose advance_token(parser):
+    marry parser["position"] parser["position"] + 1
+    argue parser["position"] < length(parser["tokens"]):
+        marry parser["current_token"] parser["tokens"][parser["position"]]
+    makeup:
+        marry parser["current_token"] memory{"type": "EOF"}
+
+propose emit_instruction(generator, instruction):
+    append(generator["bytecode"], instruction)
+
+propose emit_operand(generator, operand):
+    append(generator["bytecode"], operand)
+
+propose is_digit(char):
+    promise char >= "0" and char <= "9"
+
+propose is_alpha(char):
+    promise (char >= "a" and char <= "z") or (char >= "A" and char <= "Z")
+
+propose is_alnum(char):
+    promise is_alpha(char) or is_digit(char)
+
+propose is_comparison_operator(token_type):
+    promise token_type == "LESS_THAN" or token_type == "GREATER_THAN" or 
+            token_type == "LESS_EQUAL" or token_type == "GREATER_EQUAL"
+
+propose is_end_of_block(parser):
+    # Simplified - in a real implementation, this would check indentation
+    promise parser["current_token"]["type"] == "EOF"
+
+# Main compiler entry point
+propose compile_couplescript(source_code):
+    remember "CoupleScript Compiler v1.0"
+    remember "Compiling CoupleScript source..."
+    
+    # Tokenize
+    marry tokens accept tokenize(source_code)
+    argue length(tokens) == 0:
+        remember "Error: Tokenization failed"
+        promise hate
+    
+    remember "Tokenization complete. Found " + length(tokens) + " tokens."
+    
+    # Parse
+    marry ast accept parse(tokens)
+    argue ast == hate:
+        remember "Error: Parsing failed"
+        promise hate
+    
+    remember "Parsing complete."
+    
+    # Generate bytecode
+    marry bytecode accept generate_bytecode(ast)
+    argue length(bytecode) == 0:
+        remember "Error: Code generation failed"
+        promise hate
+    
+    remember "Code generation complete. Generated " + length(bytecode) + " instructions."
+    
+    promise bytecode
+
+# Bootstrap the compiler
+marry source_file get_command_line_arg(1)
+argue source_file == "":
+    remember "Usage: couplescript <source_file>"
+    exit(1)
+
+marry source_code read_file(source_file)
+marry bytecode accept compile_couplescript(source_code)
+
+argue bytecode != hate:
+    write_bytecode_file("output.csb", bytecode)
+    remember "Compilation successful! Output written to output.csb"
+makeup:
+    remember "Compilation failed!"
+    exit(1)

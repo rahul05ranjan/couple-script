@@ -1,0 +1,169 @@
+# Marriage Story Game in CoupleScript
+# A fun interactive story demonstrating the language features
+
+remember "💕 Welcome to the CoupleScript Marriage Story Game! 💕"
+remember ""
+
+# Main characters
+marry husband "Alex"
+marry wife "Emma"
+marry relationship_status "dating"
+marry happiness_level 70
+marry years_together 2
+
+remember "Meet our couple:"
+remember "👨 Husband: " + husband
+remember "👩 Wife: " + wife
+remember "💖 Status: " + relationship_status
+remember "😊 Happiness: " + happiness_level + "%"
+remember "📅 Years together: " + years_together
+remember ""
+
+# Function to update relationship status
+propose update_status(current_status, action):
+    argue action == "propose":
+        argue current_status == "dating":
+            promise "engaged"
+        makeup:
+            promise current_status
+    makeup action == "marry":
+        argue current_status == "engaged":
+            promise "married"
+        makeup:
+            promise current_status
+    makeup action == "celebrate":
+        promise current_status
+    makeup:
+        promise current_status
+
+# Function to calculate happiness change
+propose happiness_change(current_happiness, event):
+    argue event == "proposal":
+        promise current_happiness + 20
+    makeup event == "wedding":
+        promise current_happiness + 30
+    makeup event == "anniversary":
+        promise current_happiness + 10
+    makeup event == "argument":
+        promise current_happiness - 15
+    makeup event == "makeup":
+        promise current_happiness + 5
+    makeup:
+        promise current_happiness
+
+# Story events
+remember "📖 Chapter 1: The Proposal"
+remember "================================"
+
+marry old_happiness happiness_level
+marry relationship_status accept update_status(relationship_status, "propose")
+marry happiness_level accept happiness_change(happiness_level, "proposal")
+
+argue relationship_status == "engaged":
+    remember "🎉 " + husband + " proposed to " + wife + "!"
+    remember "💍 She said YES!"
+    remember "😍 Happiness increased from " + old_happiness + "% to " + happiness_level + "%"
+makeup:
+    remember "❌ The proposal didn't happen yet..."
+
+remember ""
+remember "📖 Chapter 2: The Wedding"
+remember "================================"
+
+marry old_happiness happiness_level
+marry relationship_status accept update_status(relationship_status, "marry")
+marry happiness_level accept happiness_change(happiness_level, "wedding")
+
+argue relationship_status == "married":
+    remember "👰💒🤵 " + husband + " and " + wife + " got married!"
+    remember "🎊 What a beautiful ceremony!"
+    remember "😍 Happiness soared from " + old_happiness + "% to " + happiness_level + "%"
+    marry years_together years_together + 1
+makeup:
+    remember "❌ They're not ready for marriage yet..."
+
+remember ""
+remember "📖 Chapter 3: Their Journey Together"
+remember "================================"
+
+# Anniversary celebrations
+marry anniversaries couple[1, 2, 3, 4, 5]
+marry anniversary_gifts couple["Paper", "Cotton", "Leather", "Flowers", "Wood"]
+
+remember "Celebrating their anniversaries:"
+anniversary year in anniversaries:
+    marry gift anniversary_gifts[year - 1]
+    marry old_happiness happiness_level
+    marry happiness_level accept happiness_change(happiness_level, "anniversary")
+    
+    remember "Year " + year + ": " + gift + " anniversary"
+    remember "  🎁 Gift theme: " + gift
+    remember "  😊 Happiness: " + old_happiness + "% → " + happiness_level + "%"
+    
+    argue year == 5:
+        remember "  🌟 Five years! Time for something special!"
+        marry happiness_level happiness_level + 15
+
+remember ""
+remember "📖 Chapter 4: Life's Ups and Downs"
+remember "================================"
+
+# Simulate some relationship challenges and resolutions
+marry life_events couple["argument", "makeup", "anniversary", "argument", "makeup"]
+marry event_descriptions couple[
+    "Had a disagreement about finances",
+    "Talked it out and understood each other",
+    "Celebrated another year together",
+    "Stressed about work affecting home life",
+    "Decided to prioritize their relationship"
+]
+
+anniversary i in couple[0, 1, 2, 3, 4]:
+    marry event life_events[i]
+    marry description event_descriptions[i]
+    marry old_happiness happiness_level
+    marry happiness_level accept happiness_change(happiness_level, event)
+    
+    remember "Event: " + description
+    
+    argue event == "argument":
+        remember "  😔 Happiness dropped from " + old_happiness + "% to " + happiness_level + "%"
+        remember "  💭 Every couple faces challenges..."
+    makeup event == "makeup":
+        remember "  😌 Happiness rose from " + old_happiness + "% to " + happiness_level + "%"
+        remember "  💕 Communication is key!"
+    makeup:
+        remember "  😊 Happiness: " + old_happiness + "% → " + happiness_level + "%"
+        remember "  🎉 Celebration brings joy!"
+    
+    remember ""
+
+remember "📖 Epilogue: Their Love Story Continues"
+remember "================================"
+
+# Final relationship summary
+argue happiness_level >= 90:
+    remember "🌟 " + husband + " and " + wife + " have an amazing relationship!"
+    remember "💖 Their love story is truly inspiring!"
+makeup happiness_level >= 70:
+    remember "😊 " + husband + " and " + wife + " have a strong, healthy relationship!"
+    remember "💕 They've learned to grow together through life's journey!"
+makeup happiness_level >= 50:
+    remember "😌 " + husband + " and " + wife + " are working on their relationship!"
+    remember "💪 With effort and communication, they'll continue to strengthen their bond!"
+makeup:
+    remember "💔 " + husband + " and " + wife + " need to focus on their relationship."
+    remember "💡 Perhaps some couples counseling would help!"
+
+remember ""
+remember "Final Statistics:"
+remember "👥 Couple: " + husband + " & " + wife
+remember "💍 Status: " + relationship_status
+remember "😊 Final Happiness: " + happiness_level + "%"
+remember "📅 Years Together: " + years_together
+
+remember ""
+remember "💝 Thank you for experiencing this CoupleScript love story!"
+remember "🎭 Every relationship is unique and beautiful in its own way!"
+remember ""
+remember "=== End of CoupleScript Marriage Story Game ==="

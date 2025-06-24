@@ -1,0 +1,32 @@
+theme: minima
+title: "CoupleScript - The Programming Language for Lovers"
+description: "Express your code with the poetry of love, marriage, and relationships"
+baseurl: ""
+url: "https://username.github.io/couplescript"
+
+# Navigation
+header_pages:
+  - index.md
+  - examples.md
+  - api.md
+  - installation.md
+
+# SEO
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Social
+github_username: username
+twitter_username: couplescript
+
+# Footer
+footer: "Made with 💕 by the CoupleScript community"
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

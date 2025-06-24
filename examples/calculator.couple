@@ -1,0 +1,41 @@
+# Simple calculator in CoupleScript
+marry a 10
+marry b 5
+
+remember "Welcome to the CoupleScript Calculator!"
+remember "Let's do some math with our couple: " + a + " and " + b
+
+remember "Addition: " + a + " + " + b + " = " + (a + b)
+remember "Subtraction: " + a + " - " + b + " = " + (a - b)
+remember "Multiplication: " + a + " * " + b + " = " + (a * b)
+remember "Division: " + a + " / " + b + " = " + (a / b)
+
+# Conditional logic - relationship metaphor
+argue a > b:
+    remember a + " is greater than " + b + " - the husband is winning!"
+makeup:
+    remember a + " is not greater than " + b + " - the wife has the upper hand!"
+
+# More relationship-themed conditions
+argue a == b:
+    remember "They're perfectly balanced - a match made in heaven!"
+makeup:
+    remember "They complement each other with their differences."
+
+# Demonstrate couples (arrays) and memories (objects)
+marry their_ages couple[25, 23]
+marry their_info memory{
+    "husband_age": 25,
+    "wife_age": 23,
+    "anniversary_year": 2020,
+    "children": 2
+}
+
+remember "Ages: Husband is " + their_ages[0] + ", Wife is " + their_ages[1]
+remember "They got married in " + their_info["anniversary_year"]
+remember "They have " + their_info["children"] + " children"
+
+# Calculate years married
+marry current_year 2024
+marry years_married current_year - their_info["anniversary_year"]
+remember "They've been married for " + years_married + " wonderful years!"

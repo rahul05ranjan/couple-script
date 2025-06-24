@@ -1,0 +1,144 @@
+{
+  "name": "couplescript",
+  "version": "1.0.0",
+  "description": "A fun, relationship-themed programming language based on husband and wife concepts",
+  "homepage": "https://github.com/username/couplescript",
+  "author": "CoupleScript Team",
+  "license": "MIT",
+  "keywords": [
+    "programming-language",
+    "interpreter",
+    "compiler",
+    "romantic",
+    "fun",
+    "educational",
+    "relationship-themed",
+    "marriage",
+    "love"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/couplescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/couplescript/issues"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "scripts": {
+    "build": "make all",
+    "build:windows": "build.bat",
+    "install": "./install.sh",
+    "install:windows": "install.bat",
+    "test": "make test",
+    "clean": "make clean",
+    "examples": "./couplescript examples/hello.couple",
+    "interactive": "./couplescript -i",
+    "demo": "./couplescript examples/marriage_story.couple"
+  },
+  "bin": {
+    "couplescript": "./couplescript"
+  },
+  "files": [
+    "couplescript",
+    "couplescript.bat",
+    "bootstrap/",
+    "examples/",
+    "Makefile",
+    "build.bat",
+    "install.sh",
+    "install.bat",
+    "README.md",
+    "INSTALLATION.md",
+    "LANGUAGE_REFERENCE.md",
+    "couplescript-compiler.couple"
+  ],
+  "directories": {
+    "example": "examples",
+    "doc": ".",
+    "lib": "bootstrap"
+  },
+  "devDependencies": {
+    "build-tools": "System build tools (gcc, make)",
+    "nasm": "The Netwide Assembler"
+  },
+  "installation": {
+    "requirements": {
+      "linux": [
+        "build-essential",
+        "nasm"
+      ],
+      "macos": [
+        "nasm"
+      ],
+      "windows": [
+        "None - works out of the box!"
+      ]
+    },
+    "commands": {
+      "linux": "sudo apt-get install build-essential nasm && make all",
+      "macos": "brew install nasm && make all",
+      "windows": "build.bat"
+    }
+  },
+  "features": [
+    "🎭 Relationship-themed keywords (marry, divorce, propose, accept, argue, makeup)",
+    "💕 Independent implementation (no Python, C, or JavaScript dependencies)",
+    "🔧 Self-hosting compiler written in CoupleScript itself",
+    "⚡ Fast assembly-based virtual machine",
+    "📚 Complete language with functions, loops, conditionals, arrays, objects",
+    "🎮 Interactive REPL mode",
+    "📖 Comprehensive documentation and examples",
+    "🌍 Cross-platform support (Windows, Linux, macOS)",
+    "🎯 Educational and fun approach to programming",
+    "💝 Perfect for learning programming concepts through love metaphors"
+  ],
+  "examples": {    "hello.couple": "Basic hello world and variable assignment",
+    "calculator.couple": "Mathematical operations with relationship themes",
+    "functions.couple": "Function definition and calling with romantic scenarios",
+    "loops.couple": "Anniversary celebrations using loops",
+    "marriage_story.couple": "Interactive story game demonstrating all features"
+  },
+  "quickstart": {
+    "windows": [
+      "git clone <repository-url>",
+      ".\\install.bat",
+      ".\\couplescript.bat examples\\hello.couple"
+    ],
+    "unix": [
+      "git clone <repository-url>",
+      "chmod +x install.sh && ./install.sh",
+      "./couplescript examples/hello.couple"
+    ]
+  },
+  "language_features": {
+    "variables": "marry variable_name value",
+    "functions": "propose function_name(params): ... promise return_value",
+    "conditionals": "argue condition: ... makeup: ...",
+    "loops": "anniversary item in collection: ...",
+    "print": "remember expression",
+    "types": [
+      "love/hate (boolean)",
+      "heart (number)",
+      "words (string)", 
+      "couple (array)",
+      "memory (object)"
+    ]
+  },
+  "community": {
+    "discord": "https://discord.gg/couplescript",
+    "forum": "https://github.com/username/couplescript/discussions",
+    "examples_repo": "https://github.com/username/couplescript-examples",
+    "wiki": "https://github.com/username/couplescript/wiki"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/username"
+  }
+}

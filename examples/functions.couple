@@ -1,0 +1,104 @@
+# Functions in CoupleScript - Building Relationships!
+
+# Function to greet couples
+propose greet_couple(husband, wife):
+    remember "Meet the lovely couple:"
+    remember "💕 " + husband + " and " + wife + " 💕"
+    remember "Wishing them a lifetime of happiness!"
+    promise "Blessed their union"
+
+# Function to calculate anniversary gifts budget
+propose anniversary_budget(years_married):
+    argue years_married < 1:
+        promise 100
+    makeup years_married < 5:
+        promise 200
+    makeup years_married < 10:
+        promise 500
+    makeup years_married < 25:
+        promise 1000
+    makeup:
+        promise 2000
+
+# Function to plan romantic date
+propose plan_date(budget):
+    argue budget < 50:
+        promise "Cozy home dinner with candles"
+    makeup budget < 200:
+        promise "Nice restaurant and movie"
+    makeup budget < 500:
+        promise "Weekend getaway to nearby city"
+    makeup:
+        promise "Luxury vacation to exotic destination"
+
+# Function to check relationship compatibility
+propose check_compatibility(age_diff, interests_match):
+    marry compatibility_score 0
+    
+    # Age difference factor
+    argue age_diff <= 3:
+        marry compatibility_score compatibility_score + 40
+    makeup age_diff <= 7:
+        marry compatibility_score compatibility_score + 25
+    makeup:
+        marry compatibility_score compatibility_score + 10
+    
+    # Common interests factor
+    argue interests_match > 80:
+        marry compatibility_score compatibility_score + 40
+    makeup interests_match > 60:
+        marry compatibility_score compatibility_score + 30
+    makeup interests_match > 40:
+        marry compatibility_score compatibility_score + 20
+    makeup:
+        marry compatibility_score compatibility_score + 5
+    
+    # Relationship advice based on score
+    argue compatibility_score >= 70:
+        remember "Perfect match! 💖"
+    makeup compatibility_score >= 50:
+        remember "Good compatibility with room to grow! 💕"
+    makeup:
+        remember "Work on building more common ground. 💪"
+    
+    promise compatibility_score
+
+# Main program - let's use our functions!
+remember "=== CoupleScript Relationship Manager ==="
+remember ""
+
+# Create our couple
+marry husband_name "Alexander"
+marry wife_name "Isabella"
+marry years_together 7
+marry age_difference 2
+marry common_interests 75
+
+# Greet the couple
+marry blessing accept greet_couple(husband_name, wife_name)
+remember "Result: " + blessing
+remember ""
+
+# Plan their anniversary celebration
+marry budget accept anniversary_budget(years_together)
+remember "Anniversary budget for " + years_together + " years: $" + budget
+
+marry date_plan accept plan_date(budget)
+remember "Perfect date idea: " + date_plan
+remember ""
+
+# Check their compatibility
+remember "Checking relationship compatibility..."
+marry score accept check_compatibility(age_difference, common_interests)
+remember "Compatibility score: " + score + "/80"
+remember ""
+
+# Anniversary countdown
+remember "Anniversary celebration countdown:"
+anniversary day in couple[7, 6, 5, 4, 3, 2, 1]:
+    remember "Days remaining: " + day
+    argue day == 1:
+        remember "Tomorrow is the big day! 🎉"
+        separate
+
+remember "Happy Anniversary, " + husband_name + " and " + wife_name + "! 🎊"

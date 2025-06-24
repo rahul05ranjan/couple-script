@@ -1,0 +1,84 @@
+# Loops in CoupleScript - Celebrating Anniversaries!
+
+# Create a couple with their journey milestones
+marry couple_names couple["Robert", "Maria"]
+marry relationship_years couple[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+marry milestone_gifts couple["Flowers", "Jewelry", "Trip", "Watch", "Ring", "Vacation", "Art", "Experience", "Surprise", "Renewal"]
+
+remember "=== " + couple_names[0] + " and " + couple_names[1] + "'s Anniversary Journey ==="
+remember ""
+
+# Anniversary celebration loop
+remember "Celebrating each year of their beautiful relationship:"
+anniversary year in relationship_years:
+    marry gift milestone_gifts[year - 1]
+    
+    remember "Year " + year + ": " + gift
+    
+    argue year == 1:
+        remember "  🌹 Their first anniversary - so sweet!"
+    makeup year == 5:
+        remember "  💍 Five years strong - half a decade!"
+        remember "  Time for something special!"
+    makeup year == 10:
+        remember "  🎊 A full decade together!"
+        remember "  🎉 Time to renew their vows!"
+        remember "  💕 What an amazing journey!"
+        separate  # End the celebration here
+    makeup:
+        remember "  💝 Another year of love and growth"
+
+remember ""
+remember "What a beautiful love story!"
+
+# Countdown to next anniversary
+remember ""
+remember "Countdown to their 11th anniversary:"
+marry countdown couple[30, 20, 10, 5, 4, 3, 2, 1]
+
+anniversary days in countdown:
+    argue days > 10:
+        remember days + " days to go..."
+    makeup days == 5:
+        remember "Only " + days + " days left! Time to plan something special! 💡"
+    makeup days <= 3:
+        remember "Just " + days + " days! Getting excited! 🎈"
+        argue days == 1:
+            remember "Tomorrow is the big day! 🎉✨"
+
+remember ""
+remember "Happy Anniversary! 🥳💖"
+
+# Anniversary gift suggestions loop
+remember ""
+remember "Gift ideas for future anniversaries:"
+marry future_years couple[11, 12, 13, 14, 15]
+marry suggested_gifts couple["Steel jewelry", "Silk scarves", "Lace items", "Ivory pieces", "Crystal vase"]
+
+anniversary i in couple[0, 1, 2, 3, 4]:
+    marry year future_years[i]
+    marry gift suggested_gifts[i]
+    
+    remember "Year " + year + ": " + gift
+    
+    argue year == 15:
+        remember "  🔮 Crystal anniversary - 15 years of clarity!"
+        separate
+
+# Memory lane - their favorite moments
+remember ""
+remember "Their favorite anniversary memories:"
+marry memories memory{
+    "year1": "First dance in their apartment",
+    "year3": "Trip to Paris together", 
+    "year5": "Surprise party with friends",
+    "year7": "Quiet dinner at home",
+    "year10": "Vow renewal ceremony"
+}
+
+anniversary year in couple[1, 3, 5, 7, 10]:
+    marry memory_key "year" + year
+    remember "Year " + year + ": " + memories[memory_key]
+
+remember ""
+remember "Here's to many more years of happiness! 🥂💕"
