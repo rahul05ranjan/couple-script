@@ -2,7 +2,7 @@ theme: minima
 title: "CoupleScript - The Programming Language for Lovers"
 description: "Express your code with the poetry of love, marriage, and relationships"
 baseurl: ""
-url: "https://username.github.io/couplescript"
+url: "https://rahul05ranjan.github.io/couple-script"
 
 # Navigation
 header_pages:
@@ -18,7 +18,7 @@ plugins:
   - jekyll-seo-tag
 
 # Social
-github_username: username
+github_username: rahul05ranjan
 twitter_username: couplescript
 
 # Footer

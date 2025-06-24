@@ -2,61 +2,81 @@
 
 Welcome to CoupleScript - the most romantic programming language ever created! This guide will help you get CoupleScript up and running on your system.
 
-## 🚀 Quick Start (Recommended)
+## 🚀 Quick Start
 
-### Option 1: Windows Users (Easiest!)
+### For All Platforms
 
-1. **Download the project** (no additional software needed!)   ```bash
-   # Clone or download the CoupleScript project
-   git clone https://github.com/rahul05ranjan/couple-script.git
-   cd couple-script
-   ```
+CoupleScript is completely independent and only requires a native assembler and linker to build. No Python, Node.js, or other language dependencies!
 
-2. **Run the build script**
+### Step 1: Prerequisites
 
-   ```bash
-   make all
-   ```
+**Windows (3 Easy Options):**
 
-3. **Start coding in love!**
+**Option A: WSL (Recommended - Easiest!)**
+```powershell
+# Install WSL with Ubuntu (one-time setup)
+wsl --install -d Ubuntu
+# Restart computer when prompted, then:
+wsl -d Ubuntu
+sudo apt update && sudo apt install build-essential nasm
+```
 
-   ```bash
-   # Run an example program
-   ./couplescript examples/hello.couple
-   
-   # Or start interactive mode
-   ./couplescript
-   ```
+**Option B: Native Windows Tools**
+- Install **NASM** assembler from [nasm.us](https://www.nasm.us/pub/nasm/releasebuilds/)
+- Install **Visual Studio Community** or **Build Tools** (free) from [visualstudio.microsoft.com](https://visualstudio.microsoft.com/downloads/)
 
-That's it! No compilers, no dependencies - just pure romance! 💖
+**Option C: Use with Current NASM + TinyCC**
+```powershell
+# If you have NASM but no Visual Studio
+# Download TinyCC (lightweight C compiler with linker)
+# Or use our pure-NASM build (coming soon!)
+```
 
-### Option 2: Linux/Mac Users
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install build-essential nasm
+```
 
-1. **Install build tools** (one-time setup)
-   ```bash
-   # Ubuntu/Debian
-   sudo apt-get install build-essential nasm
-   
-   # CentOS/RHEL
-   sudo yum install gcc nasm
-   
-   # macOS (with Homebrew)
-   brew install nasm
-   ```
+**Linux (CentOS/RHEL/Fedora):**
+```bash
+sudo yum install gcc nasm    # CentOS/RHEL
+sudo dnf install gcc nasm    # Fedora
+```
 
-2. **Build CoupleScript**
-   ```bash
-   make all
-   ```
+**macOS:**
+```bash
+# Install Xcode command line tools
+xcode-select --install
 
-3. **Start your love story**
-   ```bash
-   # Run an example
-   ./couplescript examples/hello.couple
-   
-   # Interactive mode
-   ./couplescript -i
-   ```
+# Install NASM (optional, can use built-in assembler)
+brew install nasm
+```
+
+### Step 2: Clone and Build
+
+```bash
+# Clone the CoupleScript project
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
+
+# Build CoupleScript (all platforms)
+make all
+```
+
+### Step 3: Run Your First Love Story
+
+```bash
+# Windows
+couplescript.bat examples/hello.couple
+
+# Linux/macOS
+./couplescript examples/hello.couple
+
+# Interactive mode
+# Windows: couplescript.bat
+# Linux/macOS: ./couplescript
+```
 
 ## 📦 What You Get
 
@@ -92,9 +112,10 @@ anniversary activity in favorite_things:
 ```
 
 Run it:
+
 ```bash
 # Windows
-.\couplescript.bat my_love_story.couple
+couplescript.bat my_love_story.couple
 
 # Linux/Mac
 ./couplescript my_love_story.couple
@@ -110,16 +131,16 @@ If you want the complete, independent assembly implementation:
 - **Linker** (ld on Linux/Mac, link.exe on Windows)
 
 ### Full Build Process
+
 ```bash
-# Linux/Mac
+# All platforms - use make for native assembly build
 make clean      # Clean previous builds
-make bootstrap  # Build assembly bootstrap
+make all        # Complete build including bootstrap, compiler, and VM
+
+# Alternative: step by step
+make bootstrap  # Build assembly bootstrap (if target exists)
 make compiler   # Build self-hosting compiler
 make vm        # Build virtual machine
-make all       # Complete build
-
-# Windows (with NASM installed)
-build_full.bat  # Complete assembly build
 ```
 
 ## 📖 Usage Examples
@@ -179,10 +200,18 @@ Create syntax highlighting by associating `.couple` files with CoupleScript:
 ### Common Issues & Solutions
 
 #### "Command not found" or "File not found"
+
 ```bash
 # Make sure the executable is in your PATH or use full path
-chmod +x couplescript  # Linux/Mac: Make executable
-.\couplescript.bat     # Windows: Use .bat extension
+
+# Linux/Mac: Make executable
+chmod +x couplescript
+
+# Windows: Use correct extension
+couplescript.bat program.couple
+
+# All platforms: Use make for building
+make all
 ```
 
 #### "Assembly errors" during build
@@ -200,12 +229,16 @@ chmod +x build.sh
 ```
 
 #### Windows-specific issues
+
 ```powershell
-# Enable script execution
+# Enable script execution (if needed for PowerShell)
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Use PowerShell instead of Command Prompt
-powershell .\build.bat
+# Use the correct command for Windows
+couplescript.bat program.couple
+
+# Or install WSL for a Linux-like environment
+wsl --install
 ```
 
 ### Getting Help
@@ -219,20 +252,21 @@ Try this 30-second demo:
 
 ```bash
 # 1. Clone the project
-git clone <repo-url> && cd CoupleScript
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
 
-# 2. Build (choose your platform)
-.\build.bat          # Windows
-make all            # Linux/Mac
+# 2. Build (all platforms)
+make all
 
 # 3. Run the romantic calculator
+# Windows:
+couplescript.bat examples/calculator.couple
+# Linux/macOS:
 ./couplescript examples/calculator.couple
 
 # 4. Try interactive mode
-./couplescript
-cs> marry love_level 100
-cs> remember "My love is at " + love_level + "%!"
-cs> exit
+# Windows: couplescript.bat
+# Linux/macOS: ./couplescript
 ```
 
 ## 🎨 What Makes CoupleScript Special
@@ -248,10 +282,10 @@ cs> exit
 
 | Platform | Status | Installation |
 |----------|--------|-------------|
-| Windows 10/11 | ✅ Full Support | Run `build.bat` |
+| Windows 10/11 | ✅ Full Support | Install NASM + Visual Studio Build Tools, then `make all` |
 | Ubuntu/Debian | ✅ Full Support | `apt-get install build-essential nasm && make all` |
 | CentOS/RHEL | ✅ Full Support | `yum install gcc nasm && make all` |
-| macOS | ✅ Full Support | `brew install nasm && make all` |
+| macOS | ✅ Full Support | `xcode-select --install && make all` |
 | Any Unix | ✅ Should Work | Install `nasm` + `gcc` then `make all` |
 
 ## 🎓 Learning Path

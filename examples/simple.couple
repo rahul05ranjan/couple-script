@@ -1,0 +1,9 @@
+# Simple CoupleScript Example
+remember "💕 Welcome to CoupleScript!"
+marry my_name "Alice"
+marry partner_name "Bob"
+remember "Meet our lovely couple!"
+argue love:
+    remember "They are so happy together! 🎉"
+makeup:
+    remember "Every relationship has challenges"
