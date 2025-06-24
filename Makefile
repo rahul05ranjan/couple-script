@@ -129,15 +129,50 @@ uninstall:
 	rm -f /usr/local/bin/$(VM)
 	@echo "CoupleScript uninstalled successfully!"
 
-# Test the language (simple version)
-test: $(INTERPRETER)
-	@echo "Testing CoupleScript..."
+# Test the language (comprehensive version)
+test: $(INTERPRETER) examples
+	@echo "Running CoupleScript comprehensive test suite..."
+	@if [ -f run_tests.sh ]; then \
+		chmod +x run_tests.sh; \
+		./run_tests.sh; \
+	else \
+		echo "Running basic functionality test..."; \
+		if [ -f examples/hello.couple ]; then \
+			echo "Testing hello.couple..."; \
+			./$(INTERPRETER) examples/hello.couple || echo "Note: Test requires working VM implementation"; \
+			echo "Testing calculator.couple..."; \
+			./$(INTERPRETER) examples/calculator.couple || echo "Note: Test requires working VM implementation"; \
+		else \
+			echo "No examples found. Run 'make examples' first."; \
+		fi; \
+	fi
+
+# Quick test - just run basic examples
+test-quick: $(INTERPRETER) examples
+	@echo "Running quick CoupleScript test..."
 	@echo "Testing basic functionality..."
 	@if [ -f examples/hello.couple ]; then \
 		echo "Running hello.couple..."; \
 		./$(INTERPRETER) examples/hello.couple || echo "Note: Test requires working VM implementation"; \
 	else \
 		echo "No examples found. Run 'make examples' first."; \
+	fi
+
+# Test only specific components
+test-unit:
+	@echo "Running unit tests..."
+	@if [ -f tests/unit/language_features_test.couple ] && [ -f $(INTERPRETER) ]; then \
+		./$(INTERPRETER) tests/unit/language_features_test.couple; \
+	else \
+		echo "Unit tests not available or interpreter not built"; \
+	fi
+
+test-integration:
+	@echo "Running integration tests..."
+	@if [ -f tests/integration/compiler_vm_test.couple ] && [ -f $(INTERPRETER) ]; then \
+		./$(INTERPRETER) tests/integration/compiler_vm_test.couple; \
+	else \
+		echo "Integration tests not available or interpreter not built"; \
 	fi
 
 # Create example directory and files

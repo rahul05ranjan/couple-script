@@ -196,7 +196,35 @@ We love contributions from the community! CoupleScript is all about spreading lo
 - Improve installation guides
 - Add translations for documentation
 
-### 🚀 Quick Start for Contributors
+### 🧪 Testing
+
+CoupleScript includes a comprehensive testing framework to ensure reliability and quality:
+
+```bash
+# Run all tests (Linux/macOS)
+make test
+
+# Run quick tests only
+make test-quick
+
+# Run specific test categories
+make test-unit          # Unit tests only
+make test-integration   # Integration tests only
+
+# Windows testing
+run_tests.bat           # Comprehensive test suite
+```
+
+### Test Coverage
+- ✅ **Unit Tests**: Language features, syntax, data types
+- ✅ **Integration Tests**: Compiler pipeline, VM operations
+- ✅ **Error Handling**: Syntax and runtime error detection
+- ✅ **Performance Tests**: Stress testing and benchmarks
+- ✅ **Cross-Platform**: Windows, Linux, macOS compatibility
+
+See `tests/README.md` for detailed testing documentation.
+
+## 🚀 Quick Start for Contributors
 
 #### 1. **Fork & Clone**
 ```bash
