@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 CoupleScript - The Programming Language for Lovers</title>
+    <meta name="description" content="Express your code with the poetry of love, marriage, and relationships. A fun, educational programming language with romantic metaphors.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rahul05ranjan.github.io/couple-script/">
+    <meta property="og:title" content="CoupleScript - The Programming Language for Lovers">
+    <meta property="og:description" content="Express your code with the poetry of love, marriage, and relationships">
+    <meta property="og:image" content="https://rahul05ranjan.github.io/couple-script/assets/couplescript-banner.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://rahul05ranjan.github.io/couple-script/">
+    <meta property="twitter:title" content="CoupleScript - The Programming Language for Lovers">
+    <meta property="twitter:description" content="Express your code with the poetry of love, marriage, and relationships">
+    <meta property="twitter:image" content="https://rahul05ranjan.github.io/couple-script/assets/couplescript-banner.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💕</text></svg>">
+
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --secondary-pink: #ffb6c1;
+            --accent-red: #ff1744;
+            --warm-white: #fef7f7;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --gradient-romantic: linear-gradient(135deg, #ff69b4 0%, #ff1744 100%);
+            --gradient-soft: linear-gradient(135deg, #ffeef4 0%, #fff0f5 100%);
+            --shadow-soft: 0 4px 20px rgba(255, 105, 180, 0.1);
+            --shadow-hover: 0 8px 30px rgba(255, 105, 180, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-romantic);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="20" fill="rgba(255,255,255,0.1)">💕</text></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-pink);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        /* Main sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-alt {
+            background: var(--gradient-soft);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Code examples */
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-example::before {
+            content: '💕 CoupleScript';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .code-example code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        /* Keywords highlighting */
+        .keyword { color: #ff69b4; font-weight: bold; }
+        .string { color: #a78bfa; }
+        .comment { color: #64748b; font-style: italic; }
+
+        /* Installation steps */
+        .install-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .install-step {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-pink);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .step-number {
+            background: var(--gradient-romantic);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Examples showcase */
+        .examples-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .example-header {
+            background: var(--gradient-romantic);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .example-code {
+            padding: 1.5rem;
+            background: #f8fafc;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .example-output {
+            padding: 1rem 1.5rem;
+            background: #1a202c;
+            color: #e2e8f0;
+            font-family: monospace;
+        }
+
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--secondary-pink);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-pink);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            background: var(--gradient-romantic);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="hero-title">💕 CoupleScript</h1>
+                <p class="hero-subtitle">The world's most romantic programming language - where every program is a love story!</p>
+                <div class="cta-buttons">
+                    <a href="#installation" class="btn btn-primary">
+                        <i class="fas fa-heart"></i>
+                        Start Coding Love
+                    </a>
+                    <a href="https://github.com/rahul05ranjan/couple-script" class="btn btn-secondary">
+                        <i class="fab fa-github"></i>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">💕 CoupleScript</a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#installation">Install</a></li>
+                    <li><a href="#docs">Docs</a></li>
+                    <li><a href="#community">Community</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- What is CoupleScript -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">What is CoupleScript?</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem;" class="animate-on-scroll">
+                    CoupleScript is a fun, relationship-themed programming language that uses marriage and love metaphors to make programming more enjoyable and relatable. Built completely from scratch with no dependencies on existing languages!
+                </p>
+            </div>
+
+            <div class="code-example animate-on-scroll">
+                <code>
+<span class="comment"># Your first love story in code! 💕</span>
+<span class="keyword">marry</span> husband <span class="string">"Alex"</span>
+<span class="keyword">marry</span> wife <span class="string">"Emma"</span>
+
+<span class="keyword">remember</span> <span class="string">"Meet our lovely couple: "</span> + husband + <span class="string">" and "</span> + wife
+
+<span class="keyword">argue</span> love:
+    <span class="keyword">remember</span> <span class="string">"They lived happily ever after! 🎉"</span>
+    <span class="keyword">anniversary</span> year <span class="keyword">in</span> couple[1, 2, 3, 4, 5]:
+        <span class="keyword">remember</span> <span class="string">"Year "</span> + year + <span class="string">": Still in love! 💖"</span>
+<span class="keyword">makeup</span>:
+    <span class="keyword">remember</span> <span class="string">"Every relationship has its challenges... 💪"</span>
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section section-alt" id="features">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Why Fall in Love with CoupleScript?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">💝</div>
+                    <h3 class="feature-title">Completely Independent</h3>
+                    <p>No Python, C, or JavaScript dependencies. Built from scratch with pure assembly language.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🎭</div>
+                    <h3 class="feature-title">Romantic Keywords</h3>
+                    <p>marry, propose, accept, argue, makeup, remember - programming with the language of love.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Self-Hosting</h3>
+                    <p>The compiler is written in CoupleScript itself! A true testament to the language's power.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p>Assembly-based virtual machine ensures your love stories run at the speed of light.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Cross-Platform</h3>
+                    <p>Works on Windows, Linux, and macOS. Love knows no boundaries!</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Educational</h3>
+                    <p>Learn programming through romantic metaphors that make concepts memorable and fun.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Features -->
+    <section class="section" id="language">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Language Features</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 3rem;">
+                <div class="animate-on-scroll">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-pink);">💕 Keywords & Concepts</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>marry</code> - Variable declaration/assignment</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>divorce</code> - Variable deletion</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>propose</code> - Function definition</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>accept</code> - Function call</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>argue</code> - Conditional statements (if)</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>makeup</code> - Else clause</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>remember</code> - Print/output</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>anniversary</code> - Loop construct</li>
+                    </ul>
+                </div>
+                
+                <div class="animate-on-scroll">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-pink);">💖 Data Types</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>love</code> - Boolean true</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>hate</code> - Boolean false</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>heart</code> - Numbers</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>words</code> - Strings</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>couple</code> - Arrays/Lists</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;"><code>memory</code> - Objects/Dictionaries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Showcase -->
+    <section class="section section-alt" id="examples">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">See Love in Action</h2>
+            
+            <div class="examples-showcase">
+                <div class="example-card animate-on-scroll">
+                    <div class="example-header">
+                        <i class="fas fa-heart"></i> Hello World
+                    </div>
+                    <div class="example-code"><span class="keyword">marry</span> message <span class="string">"Hello, World!"</span>
+<span class="keyword">remember</span> message</div>
+                    <div class="example-output">Hello, World!</div>
+                </div>
+                
+                <div class="example-card animate-on-scroll">
+                    <div class="example-header">
+                        <i class="fas fa-ring"></i> Functions
+                    </div>
+                    <div class="example-code"><span class="keyword">propose</span> greet(name):
+    <span class="keyword">remember</span> <span class="string">"Hello, "</span> + name + <span class="string">"!"</span>
+
+<span class="keyword">accept</span> greet(<span class="string">"Alice"</span>)</div>
+                    <div class="example-output">Hello, Alice!</div>
+                </div>
+                
+                <div class="example-card animate-on-scroll">
+                    <div class="example-header">
+                        <i class="fas fa-heart-broken"></i> Conditionals
+                    </div>
+                    <div class="example-code"><span class="keyword">marry</span> age 25
+
+<span class="keyword">argue</span> age > 18:
+    <span class="keyword">remember</span> <span class="string">"Adult"</span>
+<span class="keyword">makeup</span>:
+    <span class="keyword">remember</span> <span class="string">"Minor"</span></div>
+                    <div class="example-output">Adult</div>
+                </div>
+                
+                <div class="example-card animate-on-scroll">
+                    <div class="example-header">
+                        <i class="fas fa-calendar-heart"></i> Loops
+                    </div>
+                    <div class="example-code"><span class="keyword">marry</span> favorites couple[<span class="string">"Pizza"</span>, <span class="string">"Movies"</span>, <span class="string">"Travel"</span>]
+
+<span class="keyword">anniversary</span> item <span class="keyword">in</span> favorites:
+    <span class="keyword">remember</span> <span class="string">"💝 "</span> + item</div>
+                    <div class="example-output">💝 Pizza
+💝 Movies
+💝 Travel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="section" id="installation">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Start Your Love Story</h2>
+            
+            <div class="install-steps">
+                <div class="install-step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3>Clone the Repository</h3>
+                    <div class="code-example" style="margin: 1rem 0; font-size: 0.8rem;">
+                        <code>git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script</code>
+                    </div>
+                </div>
+                
+                <div class="install-step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3>Install Prerequisites</h3>
+                    <p><strong>Windows:</strong> NASM + Visual Studio Build Tools or WSL</p>
+                    <p><strong>Linux:</strong> <code>sudo apt install build-essential nasm</code></p>
+                    <p><strong>macOS:</strong> <code>xcode-select --install</code></p>
+                </div>
+                
+                <div class="install-step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3>Build CoupleScript</h3>
+                    <div class="code-example" style="margin: 1rem 0; font-size: 0.8rem;">
+                        <code>make all</code>
+                    </div>
+                </div>
+                
+                <div class="install-step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <h3>Start Coding Love!</h3>
+                    <div class="code-example" style="margin: 1rem 0; font-size: 0.8rem;">
+                        <code># Windows
+couplescript.bat examples/hello.couple
+
+# Linux/macOS
+./couplescript examples/hello.couple</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">CoupleScript by the Numbers</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Independent</div>
+                </div>
+                
+                <div class="stat-card animate-on-scroll">
+                    <span class="stat-number">20+</span>
+                    <div class="stat-label">Romantic Keywords</div>
+                </div>
+                
+                <div class="stat-card animate-on-scroll">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Platforms Supported</div>
+                </div>
+                
+                <div class="stat-card animate-on-scroll">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Love Level</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community -->
+    <section class="section" id="community">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Join the Romance</h2>
+            
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem;" class="animate-on-scroll">
+                    CoupleScript is all about spreading love through code. Join our community of romantic programmers!
+                </p>
+                
+                <div class="cta-buttons animate-on-scroll">
+                    <a href="https://github.com/rahul05ranjan/couple-script/issues" class="btn btn-primary">
+                        <i class="fas fa-bug"></i>
+                        Report Issues
+                    </a>
+                    <a href="https://github.com/rahul05ranjan/couple-script/discussions" class="btn btn-secondary">
+                        <i class="fas fa-comments"></i>
+                        Join Discussions
+                    </a>
+                    <a href="https://github.com/rahul05ranjan/couple-script/blob/main/CONTRIBUTING.md" class="btn btn-primary">
+                        <i class="fas fa-heart"></i>
+                        Contribute
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💕 CoupleScript</h3>
+                    <p>The world's most romantic programming language. Express your code with the poetry of love.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/rahul05ranjan/couple-script">GitHub Repository</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/INSTALLATION.md">Installation Guide</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/LANGUAGE_REFERENCE.md">Language Reference</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/tree/main/examples">Examples</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/CONTRIBUTING.md">Contributing</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/issues">Issues</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/discussions">Discussions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/releases">Downloads</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/README.md">Documentation</a></li>
+                        <li><a href="#examples">Code Examples</a></li>
+                        <li><a href="https://github.com/rahul05ranjan/couple-script/blob/main/LICENSE">License (MIT)</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/rahul05ranjan/couple-script" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?text=Check%20out%20CoupleScript%20-%20the%20most%20romantic%20programming%20language!&url=https://rahul05ranjan.github.io/couple-script" title="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://rahul05ranjan.github.io/couple-script" title="Share on LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:?subject=CoupleScript%20-%20The%20Romantic%20Programming%20Language&body=Check%20out%20this%20amazing%20romantic%20programming%20language:%20https://rahul05ranjan.github.io/couple-script" title="Share via Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #4a5568; text-align: center; color: #a0aec0;">
+                <p>&copy; 2025 CoupleScript. Made with 💕 for the programming community.</p>
+                <p style="margin-top: 0.5rem;"><em>Remember: In code as in love, every contribution matters!</em></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add floating hearts animation
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.bottom = '-50px';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.style.opacity = '0.7';
+            heart.style.animation = 'float 15s linear infinite';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 3000);
+
+        // Add sparkle cursor effect
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.97) { // Random sparkles
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = '12px';
+                sparkle.style.zIndex = '1001';
+                sparkle.style.animation = 'fadeOut 1s ease-out forwards';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        });
+
+        // Add fadeOut animation for sparkles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
