@@ -217,6 +217,33 @@ examples:
 	@echo 'marry result accept greet("Alice")' >> examples/functions.couple
 	@echo 'remember result' >> examples/functions.couple
 
+# Docker targets
+docker-build:
+	@echo "Building CoupleScript Docker image..."
+	docker build -t couplescript:latest .
+
+docker-run:
+	@echo "Running CoupleScript in Docker (interactive mode)..."
+	docker run -it --rm couplescript:latest
+
+docker-test:
+	@echo "Running CoupleScript tests in Docker..."
+	docker-compose run --rm couplescript-test
+
+docker-examples:
+	@echo "Running CoupleScript examples in Docker..."
+	docker-compose run --rm couplescript-examples
+
+docker-clean:
+	@echo "Cleaning Docker images and containers..."
+	docker-compose down --remove-orphans
+	docker system prune -f
+
+docker-dev:
+	@echo "Starting CoupleScript development environment..."
+	docker-compose up -d couplescript-dev
+	docker exec -it couplescript-dev /bin/bash
+
 # Help
 help:
 	@echo "CoupleScript Build System"
@@ -241,6 +268,12 @@ endif
 	@echo "  uninstall - Remove CoupleScript from system"
 	@echo "  test      - Run test programs"
 	@echo "  examples  - Create example CoupleScript programs"
+	@echo "  docker-build    - Build Docker image"
+	@echo "  docker-run      - Run CoupleScript in Docker"
+	@echo "  docker-test     - Run tests in Docker"
+	@echo "  docker-examples - Run examples in Docker"
+	@echo "  docker-dev      - Start development environment"
+	@echo "  docker-clean    - Clean Docker containers/images"
 	@echo "  help      - Show this help message"
 	@echo ""
 	@echo "Usage after building:"
@@ -255,4 +288,4 @@ else
 	@echo "  ./couplescript                  - Start interactive mode"
 endif
 
-.PHONY: all clean install uninstall test examples help
+.PHONY: all clean install uninstall test examples help docker-build docker-run docker-test docker-examples docker-clean docker-dev docker-build docker-run docker-test docker-examples docker-clean docker-dev

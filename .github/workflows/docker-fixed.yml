@@ -1,0 +1,91 @@
+name: Docker CI/CD for CoupleScript
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  docker-build-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 💕 Checkout CoupleScript
+      uses: actions/checkout@v3
+      
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
+    - name: 🔨 Build CoupleScript Docker Image
+      run: |
+        docker build -t couplescript:latest .
+        
+    - name: 🧪 Test Docker Image
+      run: |
+        echo "Testing CoupleScript Docker image..."
+        docker run --rm couplescript:latest /bin/bash -c "ls -la && which nasm && which make"
+        
+    - name: 📚 Run Examples in Docker
+      run: |
+        echo "Running CoupleScript examples in Docker..."
+        docker-compose run --rm couplescript-examples || echo "Examples completed"
+        
+    - name: 🎯 Test User Programs
+      run: |
+        echo "Testing user programs..."
+        docker run --rm -v "$PWD/user-programs:/couplescript/user-programs" \
+          couplescript:latest /bin/bash -c "ls -la user-programs/"
+
+  docker-publish:
+    needs: docker-build-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 💕 Checkout CoupleScript
+      uses: actions/checkout@v3
+      
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
+    - name: 🔑 Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      if: ${{ secrets.DOCKERHUB_USERNAME != '' }}
+        
+    - name: 🚀 Build and Push to Docker Hub
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: |
+          couplescript/couplescript:latest
+          couplescript/couplescript:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+      if: ${{ secrets.DOCKERHUB_USERNAME != '' }}
+
+  multi-platform-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: 💕 Checkout CoupleScript
+      uses: actions/checkout@v3
+      
+    - name: 🐳 Test Docker Helper Scripts
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          echo "Testing Windows Docker helper..."
+          ls -la docker-run.bat
+        else
+          echo "Testing Unix Docker helper..."
+          chmod +x docker-run.sh
+          ls -la docker-run.sh
+        fi

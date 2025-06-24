@@ -1,0 +1,27 @@
+# CoupleScript Docker Test Program
+# This program tests basic CoupleScript functionality in Docker
+
+marry docker_user "CoupleScript Lover"
+marry platform "Docker"
+
+remember "Welcome to CoupleScript running on " + platform + "!"
+remember "Hello, " + docker_user + "! 💕"
+
+# Test basic variable operations
+marry a 10
+marry b 5
+remember "Testing math: " + a + " + " + b + " = " + (a + b)
+
+# Test conditional logic
+argue love:
+    remember "✅ Conditional logic works!"
+    remember "CoupleScript is running perfectly in Docker! 🐳💕"
+makeup:
+    remember "❌ Something went wrong..."
+
+# Test loop (if anniversary is implemented)
+anniversary count in couple[1, 2, 3]:
+    remember "Loop iteration: " + count
+
+remember "🎉 Docker test completed successfully!"
+remember "CoupleScript + Docker = Perfect Match! 💕🐳"

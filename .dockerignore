@@ -1,0 +1,40 @@
+# Docker ignore file for CoupleScript
+# Excludes unnecessary files from Docker build context
+
+# Build artifacts
+*.o
+*.exe
+couplescript
+couplescript.bat
+output.csb
+*.out
+
+# Git files
+.git
+.gitignore
+
+# Docker files (already in build context)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation build files
+docs/_site/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# User programs directory (will be mounted as volume)
+user-programs/
+
+# Logs
+*.log
