@@ -1,27 +1,28 @@
-name: Makefile CI
+name: CoupleScript CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: configure
-      run: ./configure
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential nasm
 
-    - name: Install dependencies
-      run: make
+    - name: Build CoupleScript
+      run: make all
 
-    - name: Run check
-      run: make check
+    - name: Create examples
+      run: make examples
 
-    - name: Run distcheck
-      run: make distcheck
+    - name: Run tests
+      run: make test
