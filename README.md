@@ -97,15 +97,11 @@ anniversary i in couple[1, 2, 3, 4, 5]:
 ### 🎯 One-Click Install (Recommended!)
 
 **Windows:**
-```powershell
-# Just download and run - no additional software needed!
-.\install.bat
-```
-
-**Linux/Mac:**
 ```bash
-# Automatic dependency installation and setup
-chmod +x install.sh && ./install.sh
+# Just download and build - no additional software needed!
+git clone https://github.com/username/couplescript.git
+cd couplescript
+make all
 ```
 
 ### 🏃‍♂️ Quick Manual Install
@@ -114,11 +110,11 @@ chmod +x install.sh && ./install.sh
 ```powershell
 # 1. Download/clone this repository
 # 2. Run the build script (no additional software needed!)
-.\build.bat
+make all
 
 # 3. Start coding in love!
-.\couplescript.bat examples\hello.couple    # Run a program
-.\couplescript.bat                      # Interactive mode
+./couplescript examples/hello.couple    # Run a program
+./couplescript                          # Interactive mode
 ```
 
 **Linux/Mac:**

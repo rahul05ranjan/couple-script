@@ -14,17 +14,19 @@ Welcome to CoupleScript - the most romantic programming language ever created! T
    ```
 
 2. **Run the build script**
-   ```powershell
-   .\build.bat
+
+   ```bash
+   make all
    ```
 
 3. **Start coding in love!**
-   ```powershell
+
+   ```bash
    # Run an example program
-   .\couplescript.bat examples\hello.couple
+   ./couplescript examples/hello.couple
    
    # Or start interactive mode
-   .\couplescript.bat
+   ./couplescript
    ```
 
 That's it! No compilers, no dependencies - just pure romance! 💖

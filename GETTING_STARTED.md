@@ -6,13 +6,10 @@
 
 #### 1. **Run Example Programs**
 ```bash
-# Windows
-.\couplescript.bat examples\hello.couple
-.\couplescript.bat examples\calculator.couple
-.\couplescript.bat examples\marriage_story.couple
-
-# Linux/Mac  
+# All platforms (using Makefile)
 ./couplescript examples/hello.couple
+./couplescript examples/calculator.couple
+./couplescript examples/marriage_story.couple
 ./couplescript examples/calculator.couple
 ./couplescript examples/marriage_story.couple
 ```
