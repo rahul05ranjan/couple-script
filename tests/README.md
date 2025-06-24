@@ -42,34 +42,50 @@ tests/
 
 ## 🚀 Running Tests
 
-### Quick Test (Basic Examples)
+### CI/Build Validation Tests
 ```bash
-# Linux/macOS
-make test-quick
+# Basic CI tests (build validation only)
+make test
 
-# Windows
-call run_tests.bat
+# Quick local test (basic examples)
+make test-quick
 ```
 
-### Comprehensive Test Suite
+### Full Test Suite (Requires Working Interpreter)
 ```bash
-# Linux/macOS
-make test
+# Comprehensive test suite (Linux/macOS)
+make test-full
 # or directly:
 ./run_tests.sh
 
-# Windows
+# Windows comprehensive testing
 run_tests.bat
 ```
 
 ### Specific Test Categories
 ```bash
-# Unit tests only
+# Unit tests only (when interpreter is ready)
 make test-unit
 
-# Integration tests only  
+# Integration tests only (when interpreter is ready)
 make test-integration
 ```
+
+## 🔧 Current Testing Status
+
+### ✅ **Working in CI:**
+- **Build Validation**: Ensures project builds successfully
+- **Syntax Checking**: Validates CoupleScript file syntax
+- **Structure Validation**: Confirms all required files exist
+- **Documentation Check**: Verifies docs are present
+
+### 🚧 **Requires Full Implementation:**
+- **Runtime Testing**: Needs working VM interpreter
+- **Error Handling**: Requires complete compiler error detection
+- **Performance Testing**: Needs executable interpreter
+- **Standard Library**: Awaits library implementation
+
+The CI currently focuses on **build validation** and **project integrity** since the full interpreter is still in development.
 
 ## 📊 Test Framework Features
 

@@ -198,33 +198,55 @@ We love contributions from the community! CoupleScript is all about spreading lo
 
 ### 🧪 Testing
 
-CoupleScript includes a comprehensive testing framework to ensure reliability and quality:
+CoupleScript includes a comprehensive testing framework designed for the complete language implementation:
+
+### 🎯 **Current CI Status: ✅ PASSING**
+
+The CI pipeline validates project structure and build system:
 
 ```bash
-# Run all tests (Linux/macOS)
-make test
+# CI validation (works now)
+make test                   # Project structure validation
+./validate_project.sh      # Comprehensive project health check
 
-# Run quick tests only
-make test-quick
+# Build testing (requires NASM)
+make test-build            # Validates successful compilation
 
-# Run specific test categories
-make test-unit          # Unit tests only
-make test-integration   # Integration tests only
-
-# Windows testing
-run_tests.bat           # Comprehensive test suite
+# Full testing (requires working interpreter)
+make test-full             # Complete test suite with execution
 ```
 
-### Test Coverage
-- ✅ **Unit Tests**: Language features, syntax, data types
-- ✅ **Integration Tests**: Compiler pipeline, VM operations
-- ✅ **Error Handling**: Syntax and runtime error detection
-- ✅ **Performance Tests**: Stress testing and benchmarks
-- ✅ **Cross-Platform**: Windows, Linux, macOS compatibility
+### 📊 **Test Coverage Levels**
+
+**Level 1 - ✅ Structure Validation (CI Ready)**
+- ✅ Project structure and file organization
+- ✅ CoupleScript syntax validation in examples
+- ✅ Documentation completeness
+- ✅ Build system configuration
+
+**Level 2 - 🔨 Build Validation (NASM Required)**
+- 🔨 Bootstrap compiler assembly
+- 🔨 Virtual machine compilation
+- 🔨 Binary artifact creation
+
+**Level 3 - 🚀 Runtime Testing (Full Implementation)**
+- 🚀 Language feature execution
+- 🚀 Error handling validation
+- 🚀 Performance benchmarking
+- 🚀 Cross-platform compatibility
+
+### 🏗️ **Testing Infrastructure**
+
+The project includes a complete testing framework ready for when the interpreter is functional:
+
+- `tests/test_framework.couple` - Testing framework written in CoupleScript
+- `tests/unit/` - Unit tests for language features
+- `tests/integration/` - End-to-end integration tests
+- `run_tests.sh` / `run_tests.bat` - Cross-platform test runners
 
 See `tests/README.md` for detailed testing documentation.
 
-## 🚀 Quick Start for Contributors
+## 🚀 Quick Startfor Contributors
 
 #### 1. **Fork & Clone**
 ```bash

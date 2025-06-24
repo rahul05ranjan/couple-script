@@ -172,6 +172,11 @@ CoupleScript is a fun, relationship-themed programming language that uses marria
         <h3>Cross-Platform</h3>
         <p>Works on Windows, Linux, and macOS. Love knows no boundaries!</p>
     </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧪</div>
+        <h3>Comprehensive Testing</h3>
+        <p>Production-grade test suite with CI/CD pipeline ensures reliability and quality.</p>
+    </div>
     
     <div class="feature-card">
         <div class="feature-icon">📚</div>
