@@ -1,10 +1,10 @@
 # CoupleScript 💕
 ### The Programming Language for Lovers
 
-[![Version](https://img.shields.io/badge/version-1.0.0-pink.svg)](https://github.com/username/couplescript)
+[![Version](https://img.shields.io/badge/version-1.0.0-pink.svg)](https://github.com/rahul05ranjan/couple-script)
 [![License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](INSTALLATION.md)
-[![Love](https://img.shields.io/badge/made_with-love-ff69b4.svg)](https://github.com/username/couplescript)
+[![Love](https://img.shields.io/badge/made_with-love-ff69b4.svg)](https://github.com/rahul05ranjan/couple-script)
 
 Welcome to **CoupleScript** - the world's most romantic programming language! Express your code with the poetry of love, marriage, and relationships. From `marry`ing variables to `propose`ing functions, every line of code tells a love story.
 
@@ -19,16 +19,13 @@ Welcome to **CoupleScript** - the world's most romantic programming language! Ex
 
 ## 🚀 Quick Start
 
-### One-Line Installation
+### Simple Installation
 
-**Windows (PowerShell):**
-```powershell
-iwr -useb https://raw.githubusercontent.com/username/couplescript/main/install.bat | iex
-```
-
-**Linux/macOS:**
+**All Platforms:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_install.sh | bash
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
+make all
 ```
 
 ### Write Your First Love Story
@@ -49,7 +46,7 @@ couplescript hello_love.couple
 ### Windows
 1. **One-Click Installer:**
    ```powershell
-   iwr -useb https://raw.githubusercontent.com/username/couplescript/main/install.bat | iex
+   iwr -useb https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/install.bat | iex
    ```
 
 2. **Manual Installation:**
@@ -60,15 +57,14 @@ couplescript hello_love.couple
 ### Linux/macOS
 1. **Quick Install:**
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/quick_install.sh | bash
    ```
 
 2. **Manual Installation:**
    ```bash
-   git clone https://github.com/username/couplescript.git
-   cd couplescript
-   chmod +x install.sh
-   ./install.sh
+   git clone https://github.com/rahul05ranjan/couple-script.git
+   cd couple-script
+   make all
    ```
 
 ### Verify Installation
@@ -338,11 +334,9 @@ Explore our collection of 20+ fun examples:
 ### Building from Source
 
 ```bash
-git clone https://github.com/username/couplescript.git
-cd couplescript
-
-# Windows
-build.bat
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
+make all
 
 # Linux/macOS
 make
@@ -368,8 +362,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 🤝 Community
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/username/couplescript/issues)
-- **Discussions**: [Join the community](https://github.com/username/couplescript/discussions)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/rahul05ranjan/couple-script/issues)
+- **Discussions**: [Join the community](https://github.com/rahul05ranjan/couple-script/discussions)
 - **Discord**: [CoupleScript Community Server](https://discord.gg/couplescript)
 - **Twitter**: [@CoupleScript](https://twitter.com/couplescript)
 
@@ -385,4 +379,4 @@ Created with love by the CoupleScript community. Special thanks to all contribut
 
 **"In code as in love, every statement should be meaningful." - CoupleScript Philosophy**
 
-[⭐ Star us on GitHub](https://github.com/username/couplescript) | [📥 Download Latest Release](https://github.com/username/couplescript/releases)
+[⭐ Star us on GitHub](https://github.com/rahul05ranjan/couple-script) | [📥 Download Latest Release](https://github.com/rahul05ranjan/couple-script/releases)

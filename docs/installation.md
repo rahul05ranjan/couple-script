@@ -8,12 +8,12 @@ Get CoupleScript up and running on your system in minutes! Choose your preferred
 
 #### Windows (PowerShell)
 ```powershell
-iwr -useb https://raw.githubusercontent.com/username/couplescript/main/install.bat | iex
+iwr -useb https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/install.bat | iex
 ```
 
 #### Linux/macOS
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/quick_install.sh | bash
 ```
 
 ### Manual Installation
@@ -27,8 +27,8 @@ curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_in
 
 **1. Download CoupleScript**
 ```bash
-git clone https://github.com/username/couplescript.git
-cd couplescript
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
 ```
 
 **2. Build and Install**
@@ -63,14 +63,14 @@ CoupleScript 1.0.0 - The Programming Language for Lovers 💕
 1. Open PowerShell as Administrator
 2. Run the installation command:
    ```powershell
-   iwr -useb https://raw.githubusercontent.com/username/couplescript/main/install.bat | iex
+   iwr -useb https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/install.bat | iex
    ```
 3. Follow the prompts
 
 #### Method 2: Manual Build
 1. **Download** the repository:
    ```powershell
-   git clone https://github.com/username/couplescript.git
+   git clone https://github.com/rahul05ranjan/couple-script.git
    cd couplescript
    ```
 
@@ -92,7 +92,7 @@ CoupleScript 1.0.0 - The Programming Language for Lovers 💕
 
 #### Method 1: Quick Install Script
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/quick_install.sh | bash
 ```
 
 #### Method 2: Manual Installation
@@ -112,7 +112,7 @@ curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_in
 
 2. **Build CoupleScript**:
    ```bash
-   git clone https://github.com/username/couplescript.git
+   git clone https://github.com/rahul05ranjan/couple-script.git
    cd couplescript
    chmod +x install.sh
    ./install.sh
@@ -133,13 +133,13 @@ curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_in
 
 #### Method 1: Quick Install
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/quick_install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/quick_install.sh | bash
 ```
 
 #### Method 2: Using Homebrew
 ```bash
 # Add our tap (coming soon)
-brew tap username/couplescript
+brew tap rahul05ranjan/couple-script
 brew install couplescript
 ```
 
@@ -151,7 +151,7 @@ brew install couplescript
 
 2. **Build CoupleScript**:
    ```bash
-   git clone https://github.com/username/couplescript.git
+   git clone https://github.com/rahul05ranjan/couple-script.git
    cd couplescript
    chmod +x install.sh
    ./install.sh
@@ -168,7 +168,7 @@ For contributors and developers who want to modify CoupleScript:
 
 ### Clone and Setup Development Environment
 ```bash
-git clone https://github.com/username/couplescript.git
+git clone https://github.com/rahul05ranjan/couple-script.git
 cd couplescript
 
 # Build debug version
@@ -253,13 +253,13 @@ Run CoupleScript in a container:
 
 ```bash
 # Pull the official image
-docker pull username/couplescript:latest
+docker pull rahul05ranjan/couple-script:latest
 
 # Run interactively
-docker run -it username/couplescript:latest
+docker run -it rahul05ranjan/couple-script:latest
 
 # Run a CoupleScript file
-docker run -v $(pwd):/app username/couplescript:latest /app/my_love_story.couple
+docker run -v $(pwd):/app rahul05ranjan/couple-script:latest /app/my_love_story.couple
 ```
 
 ### Build Docker Image
@@ -318,7 +318,7 @@ sudo snap install couplescript
 #### Homebrew
 ```bash
 # Add tap (coming soon)
-brew tap username/couplescript
+brew tap rahul05ranjan/couple-script
 brew install couplescript
 ```
 
@@ -447,7 +447,7 @@ couplescript --help
 ### Getting Help
 
 - **Documentation**: [docs.couplescript.org](https://docs.couplescript.org)
-- **GitHub Issues**: [github.com/username/couplescript/issues](https://github.com/username/couplescript/issues)
+- **GitHub Issues**: [github.com/rahul05ranjan/couple-script/issues](https://github.com/rahul05ranjan/couple-script/issues)
 - **Community Discord**: [discord.gg/couplescript](https://discord.gg/couplescript)
 - **Email Support**: support@couplescript.org
 
@@ -481,7 +481,7 @@ couplescript --list-versions
 couplescript --use-version 1.2.0
 
 # Install specific version
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/v1.2.0/quick_install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/v1.2.0/quick_install.sh | bash
 ```
 
 ## 🗑️ Uninstallation
@@ -489,7 +489,7 @@ curl -fsSL https://raw.githubusercontent.com/username/couplescript/v1.2.0/quick_
 ### Remove CoupleScript
 ```bash
 # Automated removal
-curl -fsSL https://raw.githubusercontent.com/username/couplescript/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rahul05ranjan/couple-script/main/uninstall.sh | bash
 
 # Manual removal
 sudo rm -rf /usr/local/bin/couplescript

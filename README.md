@@ -3,10 +3,10 @@
 *The world's most romantic programming language - where every program is a love story!*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-pink.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/username/couplescript)
-[![Language](https://img.shields.io/badge/Language-CoupleScript-ff69b4.svg)](https://github.com/username/couplescript)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/username/couplescript)
-[![Love Level](https://img.shields.io/badge/Love%20Level-100%25-red.svg?style=flat&logo=heart)](https://github.com/username/couplescript)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/rahul05ranjan/couple-script)
+[![Language](https://img.shields.io/badge/Language-CoupleScript-ff69b4.svg)](https://github.com/rahul05ranjan/couple-script)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/rahul05ranjan/couple-script)
+[![Love Level](https://img.shields.io/badge/Love%20Level-100%25-red.svg?style=flat&logo=heart)](https://github.com/rahul05ranjan/couple-script)
 [![Documentation](https://img.shields.io/badge/docs-GitHub_Pages-blue.svg)](https://username.github.io/couplescript)
 
 ## 🌐 **[📖 Complete Documentation Website →](https://username.github.io/couplescript)**
@@ -99,8 +99,8 @@ anniversary i in couple[1, 2, 3, 4, 5]:
 **Windows:**
 ```bash
 # Just download and build - no additional software needed!
-git clone https://github.com/username/couplescript.git
-cd couplescript
+git clone https://github.com/rahul05ranjan/couple-script.git
+cd couple-script
 make all
 ```
 
